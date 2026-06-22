@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>cdc-redis-pro | Redis source drivers for cdc-core</title>
+    <meta
+      name="description"
+      content="Commercial Redis source drivers for cdc-core with Streams, Pub/Sub, keyspace notifications, Sentinel failover, Cluster routing, and TLS/ACL certification."
+    >
+    <meta name="robots" content="index,follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="cdc-redis-pro">
+    <meta
+      property="og:description"
+      content="Commercial Redis source drivers for cdc-core with Streams, Pub/Sub, keyspace notifications, Sentinel failover, Cluster routing, and TLS/ACL certification."
+    >
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f8fc;
+        --panel: #ffffff;
+        --text: #132238;
+        --muted: #55657a;
+        --accent: #1d4ed8;
+        --accent-soft: #dbeafe;
+        --border: #d7e0ea;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 64px 24px 80px;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 32px;
+        box-shadow: 0 12px 36px rgba(19, 34, 56, 0.06);
+      }
+
+      .eyebrow {
+        display: inline-block;
+        margin-bottom: 16px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 5vw, 3.6rem);
+        line-height: 1.08;
+        letter-spacing: -0.04em;
+      }
+
+      .lead {
+        max-width: 68ch;
+        margin: 0 0 24px;
+        font-size: 1.08rem;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        margin: 28px 0;
+      }
+
+      .tile {
+        padding: 18px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: #fbfdff;
+      }
+
+      .tile h2 {
+        margin: 0 0 8px;
+        font-size: 1rem;
+      }
+
+      .tile p,
+      li {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      a.button {
+        display: inline-block;
+        padding: 12px 16px;
+        border-radius: 12px;
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      a.link {
+        align-self: center;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      code {
+        padding: 0.15rem 0.35rem;
+        border-radius: 6px;
+        background: #eef4ff;
+      }
+
+      pre {
+        overflow-x: auto;
+        margin: 18px 0 0;
+        padding: 18px;
+        border-radius: 16px;
+        background: #0f172a;
+        color: #e2e8f0;
+      }
+
+      pre code {
+        background: transparent;
+        color: inherit;
+        padding: 0;
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "cdc-redis-pro",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Linux, macOS, Windows",
+        "description": "Commercial Redis source drivers for cdc-core with Streams, Pub/Sub, keyspace notifications, Sentinel failover, Cluster routing, and TLS/ACL certification.",
+        "url": "https://kanutocd.github.io/cdc-redis-pro/",
+        "codeRepository": "https://github.com/kanutocd/cdc-redis-pro"
+      }
+    </script>
+  </head>
+  <body>
+    <main>
+      <section class="card">
+        <span class="eyebrow">Redis source drivers for cdc-core</span>
+        <h1>cdc-redis-pro</h1>
+        <p class="lead">
+          Commercial Redis source drivers for <code>cdc-core</code>. This
+          documentation source is static and mirror-friendly so a separate
+          public site can publish it without touching the private codebase.
+        </p>
+
+        <div class="grid">
+          <div class="tile">
+            <h2>What it covers</h2>
+            <ul>
+              <li>Standalone Redis connectivity</li>
+              <li>Redis Streams recovery and checkpoints</li>
+              <li>Pub/Sub and keyspace notification sources</li>
+            </ul>
+          </div>
+
+          <div class="tile">
+            <h2>Topology support</h2>
+            <ul>
+              <li>Sentinel failover and reconnects</li>
+              <li>Redis Cluster routing and same-slot Streams</li>
+              <li>Sharded Pub/Sub and cluster keyspace subscriptions</li>
+            </ul>
+          </div>
+
+          <div class="tile">
+            <h2>Operational checks</h2>
+            <ul>
+              <li>TLS and ACL certification matrix</li>
+              <li>Failover and resharding recovery</li>
+              <li>Local Docker-backed verification tasks</li>
+            </ul>
+          </div>
+        </div>
+
+        <pre><code>bundle exec rake sentinel:certify
+bundle exec rake cluster:certify
+bundle exec rake security:certify</code></pre>
+
+        <p class="lead" style="margin-top: 24px">
+          Public discovery should point at the mirrored docs site, while this
+          repository remains private.
+        </p>
+
+        <p class="lead" style="margin-top: 12px">
+          The source repository stays private; the public mirror carries the
+          documentation surface for discovery.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
