@@ -3,152 +3,497 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>cdc-redis-pro | Redis source drivers for cdc-core</title>
+    <title>cdc-redis-pro | Commercial Redis CDC source drivers for Ruby</title>
     <meta
       name="description"
-      content="Commercial Redis source drivers for cdc-core with Streams, Pub/Sub, keyspace notifications, Sentinel failover, Cluster routing, and TLS/ACL certification."
+      content="cdc-redis-pro provides commercial Redis source drivers for cdc-core: Streams recovery, Pub/Sub, keyspace notifications, Sentinel failover, Redis Cluster routing, sharded Pub/Sub, and TLS/ACL certification."
     >
     <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://kanutocd.github.io/cdc-redis-pro-docs/">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kanutocd.github.io/cdc-redis-pro-docs/">
     <meta property="og:title" content="cdc-redis-pro">
     <meta
       property="og:description"
-      content="Commercial Redis source drivers for cdc-core with Streams, Pub/Sub, keyspace notifications, Sentinel failover, Cluster routing, and TLS/ACL certification."
+      content="Commercial Redis CDC source drivers for cdc-core with Streams recovery, ephemeral sources, Sentinel, Cluster, sharded Pub/Sub, and TLS/ACL certification."
     >
+    <meta name="twitter:card" content="summary_large_image">
     <style>
       :root {
         color-scheme: light;
-        --bg: #f6f8fc;
-        --panel: #ffffff;
-        --text: #132238;
-        --muted: #55657a;
-        --accent: #1d4ed8;
-        --accent-soft: #dbeafe;
-        --border: #d7e0ea;
+        --bg: #f7f5f0;
+        --surface: #ffffff;
+        --surface-alt: #f0f6f2;
+        --text: #17212b;
+        --muted: #53606d;
+        --quiet: #6d7480;
+        --line: #d8ddd5;
+        --primary: #0f766e;
+        --primary-dark: #115e59;
+        --amber: #b45309;
+        --red: #b91c1c;
+        --ink: #101827;
+        --code: #111827;
       }
 
-      html,
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         margin: 0;
-        padding: 0;
         background: var(--bg);
         color: var(--text);
-        font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      a {
+        color: var(--primary-dark);
+        text-decoration-thickness: 0.08em;
+        text-underline-offset: 0.2em;
+      }
+
+      .wrap {
+        width: min(1120px, calc(100% - 40px));
+        margin: 0 auto;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+        background: rgba(247, 245, 240, 0.94);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 64px;
+        gap: 18px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        color: var(--ink);
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border: 1px solid #cfd8d2;
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .brand span:last-child {
+        overflow-wrap: anywhere;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        font-size: 0.94rem;
+      }
+
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
       }
 
       main {
-        max-width: 920px;
-        margin: 0 auto;
-        padding: 64px 24px 80px;
+        padding-bottom: 72px;
       }
 
-      .card {
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        padding: 32px;
-        box-shadow: 0 12px 36px rgba(19, 34, 56, 0.06);
+      .hero {
+        min-height: calc(100vh - 64px);
+        display: grid;
+        align-items: center;
+        padding: 58px 0 32px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 0.86fr);
+        align-items: center;
+        gap: 48px;
       }
 
       .eyebrow {
-        display: inline-block;
-        margin-bottom: 16px;
-        padding: 6px 12px;
-        border-radius: 999px;
-        background: var(--accent-soft);
-        color: var(--accent);
-        font-size: 0.875rem;
-        font-weight: 700;
-        letter-spacing: 0.02em;
+        margin: 0 0 14px;
+        color: var(--primary-dark);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
       }
 
       h1 {
-        margin: 0 0 12px;
-        font-size: clamp(2rem, 5vw, 3.6rem);
-        line-height: 1.08;
-        letter-spacing: -0.04em;
+        max-width: 720px;
+        margin-bottom: 18px;
+        color: var(--ink);
+        font-size: clamp(2.45rem, 8vw, 5.8rem);
+        line-height: 0.96;
+        letter-spacing: 0;
       }
 
       .lead {
         max-width: 68ch;
-        margin: 0 0 24px;
-        font-size: 1.08rem;
         color: var(--muted);
+        font-size: 1.12rem;
       }
 
-      .grid {
-        display: grid;
-        gap: 16px;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        margin: 28px 0;
-      }
-
-      .tile {
-        padding: 18px;
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        background: #fbfdff;
-      }
-
-      .tile h2 {
-        margin: 0 0 8px;
-        font-size: 1rem;
-      }
-
-      .tile p,
-      li {
-        margin: 0;
-        color: var(--muted);
-      }
-
-      ul {
-        margin: 0;
-        padding-left: 18px;
-      }
-
-      .links {
+      .actions {
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
         margin-top: 28px;
       }
 
-      a.button {
-        display: inline-block;
-        padding: 12px 16px;
-        border-radius: 12px;
-        background: var(--accent);
-        color: white;
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 10px 15px;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        background: var(--primary);
+        color: #fff;
+        font-weight: 750;
         text-decoration: none;
-        font-weight: 700;
       }
 
-      a.link {
-        align-self: center;
-        color: var(--accent);
-        text-decoration: none;
-        font-weight: 600;
+      .button.secondary {
+        border-color: var(--line);
+        background: #fff;
+        color: var(--primary-dark);
+      }
+
+      .hero-note {
+        margin-top: 22px;
+        color: var(--quiet);
+        font-size: 0.95rem;
+      }
+
+      .topology {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        box-shadow: 0 14px 42px rgba(23, 33, 43, 0.08);
+        overflow: hidden;
+      }
+
+      .topology-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: 48px;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+        background: #fcfcfa;
+        font-size: 0.88rem;
+        font-weight: 760;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--primary-dark);
+        white-space: nowrap;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #16a34a;
+      }
+
+      .topology-body {
+        padding: 22px;
+      }
+
+      .flow {
+        display: grid;
+        gap: 12px;
+      }
+
+      .node {
+        display: grid;
+        grid-template-columns: 34px minmax(0, 1fr);
+        gap: 12px;
+        align-items: center;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .node strong,
+      .node span {
+        display: block;
+      }
+
+      .node span {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .icon {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        background: var(--surface-alt);
+        color: var(--primary-dark);
+        font-weight: 900;
+      }
+
+      .connector {
+        width: 1px;
+        height: 18px;
+        margin-left: 29px;
+        background: var(--line);
+      }
+
+      section {
+        padding: 56px 0;
+        border-top: 1px solid rgba(216, 221, 213, 0.8);
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 22px;
+      }
+
+      h2 {
+        margin-bottom: 10px;
+        color: var(--ink);
+        font-size: clamp(1.7rem, 4vw, 2.6rem);
+        line-height: 1.1;
+        letter-spacing: 0;
+      }
+
+      .section-head p {
+        max-width: 58ch;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .tile {
+        min-height: 188px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .tile h3 {
+        margin-bottom: 8px;
+        color: var(--ink);
+        font-size: 1.05rem;
+      }
+
+      .tile p,
+      .tile li {
+        color: var(--muted);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .matrix {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .matrix th,
+      .matrix td {
+        padding: 13px 14px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .matrix th {
+        background: #fcfcfa;
+        color: var(--ink);
+        font-size: 0.88rem;
+      }
+
+      .matrix td {
+        color: var(--muted);
+      }
+
+      .matrix tr:last-child td {
+        border-bottom: 0;
       }
 
       code {
-        padding: 0.15rem 0.35rem;
+        padding: 0.13rem 0.32rem;
         border-radius: 6px;
-        background: #eef4ff;
+        background: #eef3ef;
+        color: #15322f;
+        font-size: 0.92em;
       }
 
       pre {
         overflow-x: auto;
-        margin: 18px 0 0;
+        margin: 0;
         padding: 18px;
-        border-radius: 16px;
-        background: #0f172a;
-        color: #e2e8f0;
+        border-radius: 8px;
+        background: var(--code);
+        color: #e5e7eb;
+        font-size: 0.92rem;
       }
 
       pre code {
+        padding: 0;
         background: transparent;
         color: inherit;
-        padding: 0;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .panel {
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .checks {
+        display: grid;
+        gap: 10px;
+      }
+
+      .check {
+        display: grid;
+        grid-template-columns: 24px minmax(0, 1fr);
+        gap: 10px;
+        align-items: start;
+        color: var(--muted);
+      }
+
+      .check b {
+        color: var(--text);
+      }
+
+      .badge {
+        display: inline-grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        background: #dcfce7;
+        color: #166534;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .warning {
+        border-left: 4px solid var(--amber);
+        padding: 14px 16px;
+        border-radius: 8px;
+        background: #fff7ed;
+        color: #7c2d12;
+      }
+
+      footer {
+        padding: 30px 0 42px;
+        border-top: 1px solid var(--line);
+        color: var(--quiet);
+        font-size: 0.94rem;
+      }
+
+      @media (max-width: 840px) {
+        .hero {
+          min-height: auto;
+          padding-top: 42px;
+        }
+
+        .hero-grid,
+        .split,
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .section-head {
+          display: block;
+        }
+
+        .matrix {
+          display: block;
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .wrap {
+          width: min(100% - 28px, 1120px);
+        }
+
+        .nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: 14px 0;
+        }
+
+        nav {
+          justify-content: flex-start;
+          gap: 12px;
+        }
+
+        h1 {
+          font-size: 2.6rem;
+        }
       }
     </style>
     <script type="application/ld+json">
@@ -158,66 +503,297 @@
         "name": "cdc-redis-pro",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Linux, macOS, Windows",
-        "description": "Commercial Redis source drivers for cdc-core with Streams, Pub/Sub, keyspace notifications, Sentinel failover, Cluster routing, and TLS/ACL certification.",
-        "url": "https://kanutocd.github.io/cdc-redis-pro/",
-        "codeRepository": "https://github.com/kanutocd/cdc-redis-pro"
+        "programmingLanguage": "Ruby",
+        "runtimePlatform": "Ruby 4.0+",
+        "description": "Commercial Redis source drivers for cdc-core with Redis Streams recovery, Pub/Sub, keyspace notifications, Sentinel failover, Redis Cluster routing, sharded Pub/Sub, and TLS/ACL certification.",
+        "url": "https://kanutocd.github.io/cdc-redis-pro-docs/",
+        "codeRepository": "https://github.com/kanutocd/cdc-redis-pro-docs",
+        "keywords": "Redis CDC, Redis Streams, Ruby, cdc-core, Sentinel, Redis Cluster, keyspace notifications"
       }
     </script>
   </head>
   <body>
-    <main>
-      <section class="card">
-        <span class="eyebrow">Redis source drivers for cdc-core</span>
-        <h1>cdc-redis-pro</h1>
-        <p class="lead">
-          Commercial Redis source drivers for <code>cdc-core</code>. This
-          documentation source is static and mirror-friendly so a separate
-          public site can publish it without touching the private codebase.
-        </p>
+    <header>
+      <div class="wrap nav">
+        <a class="brand" href="#top" aria-label="cdc-redis-pro home">
+          <span class="mark">R</span>
+          <span>cdc-redis-pro</span>
+        </a>
+        <nav aria-label="Page sections">
+          <a href="#capabilities">Capabilities</a>
+          <a href="#guarantees">Guarantees</a>
+          <a href="#topologies">Topologies</a>
+          <a href="#access">Access</a>
+        </nav>
+      </div>
+    </header>
 
-        <div class="grid">
-          <div class="tile">
-            <h2>What it covers</h2>
-            <ul>
-              <li>Standalone Redis connectivity</li>
-              <li>Redis Streams recovery and checkpoints</li>
-              <li>Pub/Sub and keyspace notification sources</li>
-            </ul>
+    <main id="top">
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <p class="eyebrow">Commercial Redis CDC sources for Ruby</p>
+            <h1>cdc-redis-pro</h1>
+            <p class="lead">
+              Redis source drivers for <code>cdc-core</code>: recoverable
+              Streams, ephemeral Pub/Sub and keyspace notifications, Sentinel
+              failover, Redis Cluster routing, sharded Pub/Sub, and
+              Docker-backed certification for TLS, ACLs, failover, and
+              resharding.
+            </p>
+            <div class="actions">
+              <a class="button" href="#quickstart">View integration shape</a>
+              <a class="button secondary" href="#access">Request package access</a>
+            </div>
+            <p class="hero-note">
+              Public documentation mirror for discovery. The implementation
+              remains private and is distributed as a commercial gem.
+            </p>
           </div>
 
-          <div class="tile">
-            <h2>Topology support</h2>
-            <ul>
-              <li>Sentinel failover and reconnects</li>
-              <li>Redis Cluster routing and same-slot Streams</li>
-              <li>Sharded Pub/Sub and cluster keyspace subscriptions</li>
-            </ul>
+          <aside class="topology" aria-label="Redis source topology diagram">
+            <div class="topology-head">
+              <span>Source pipeline</span>
+              <span class="status"><span class="dot"></span>certified locally</span>
+            </div>
+            <div class="topology-body">
+              <div class="flow">
+                <div class="node">
+                  <span class="icon">1</span>
+                  <span><strong>Redis topology</strong><span>Standalone, TLS, Sentinel, Cluster</span></span>
+                </div>
+                <div class="connector"></div>
+                <div class="node">
+                  <span class="icon">2</span>
+                  <span><strong>Source driver</strong><span>Streams, Pub/Sub, sharded Pub/Sub, keyspace</span></span>
+                </div>
+                <div class="connector"></div>
+                <div class="node">
+                  <span class="icon">3</span>
+                  <span><strong>SourceEvent</strong><span>Immutable Redis event envelope</span></span>
+                </div>
+                <div class="connector"></div>
+                <div class="node">
+                  <span class="icon">4</span>
+                  <span><strong>cdc-core adapter</strong><span>Normalized change events for downstream sinks</span></span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="capabilities">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Capability surface</p>
+              <h2>Built around Redis source semantics</h2>
+            </div>
+            <p>
+              Redis does not expose one universal CDC stream. The gem keeps
+              each source mode explicit so replay, loss, checkpointing, and
+              recovery guarantees stay visible to operators.
+            </p>
           </div>
 
-          <div class="tile">
-            <h2>Operational checks</h2>
-            <ul>
-              <li>TLS and ACL certification matrix</li>
-              <li>Failover and resharding recovery</li>
-              <li>Local Docker-backed verification tasks</li>
-            </ul>
+          <div class="grid">
+            <article class="tile">
+              <h3>Redis Streams</h3>
+              <p>
+                <code>XREAD</code>, <code>XREADGROUP</code>, consumer groups,
+                checkpoint inspection, pending-entry recovery,
+                <code>XAUTOCLAIM</code>, duplicate suppression, and optional
+                dead-letter streams.
+              </p>
+            </article>
+
+            <article class="tile">
+              <h3>Ephemeral channels</h3>
+              <p>
+                Exact Pub/Sub, pattern Pub/Sub, and Redis Cluster sharded
+                Pub/Sub with readiness tracking, reconnect metrics, and
+                explicit loss-window reporting.
+              </p>
+            </article>
+
+            <article class="tile">
+              <h3>Keyspace notifications</h3>
+              <p>
+                Startup validation for <code>notify-keyspace-events</code>,
+                optional best-effort value enrichment, and Cluster
+                multi-primary subscriptions through <code>CLUSTER SHARDS</code>.
+              </p>
+            </article>
           </div>
         </div>
+      </section>
 
-        <pre><code>bundle exec rake sentinel:certify
-bundle exec rake cluster:certify
-bundle exec rake security:certify</code></pre>
+      <section id="guarantees">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Delivery model</p>
+              <h2>Guarantees are source-specific</h2>
+            </div>
+          </div>
 
-        <p class="lead" style="margin-top: 24px">
-          Public discovery should point at the mirrored docs site, while this
-          repository remains private.
-        </p>
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>Source</th>
+                <th>Delivery</th>
+                <th>Replay</th>
+                <th>Operational note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Streams</td>
+                <td>At-least-once</td>
+                <td>Yes</td>
+                <td>Acknowledges and advances checkpoints only after successful processing.</td>
+              </tr>
+              <tr>
+                <td>Pub/Sub</td>
+                <td>At-most-once</td>
+                <td>No</td>
+                <td>Reconnects report loss windows; missed messages are not recovered.</td>
+              </tr>
+              <tr>
+                <td>Sharded Pub/Sub</td>
+                <td>At-most-once</td>
+                <td>No</td>
+                <td>Routes channels by slot and rebinds subscriptions after topology changes.</td>
+              </tr>
+              <tr>
+                <td>Keyspace notifications</td>
+                <td>At-most-once</td>
+                <td>No</td>
+                <td>Reports key and operation; optional enrichment is best effort.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-        <p class="lead" style="margin-top: 12px">
-          The source repository stays private; the public mirror carries the
-          documentation surface for discovery.
-        </p>
+      <section id="topologies">
+        <div class="wrap split">
+          <div>
+            <p class="eyebrow">Production topology</p>
+            <h2>Sentinel, Cluster, TLS, and ACLs</h2>
+            <p class="lead">
+              Connection setup is topology-neutral at the source API boundary.
+              Source-owned clients reconnect through the same factory, while
+              Redis Cluster commands route through <code>redis-cluster-client</code>.
+            </p>
+            <div class="warning">
+              Cluster Streams support single streams and hash-tagged
+              same-slot multi-stream reads. Redis requires one-slot
+              <code>XREAD</code> and <code>XREADGROUP</code> commands.
+            </div>
+          </div>
+
+          <div class="panel checks">
+            <div class="check">
+              <span class="badge">OK</span>
+              <span><b>Sentinel failover</b><br>Primary-loss certification for Streams, Pub/Sub, and keyspace sources.</span>
+            </div>
+            <div class="check">
+              <span class="badge">OK</span>
+              <span><b>Redis Cluster routing</b><br>Cross-slot commands, same-slot Streams, sharded Pub/Sub, keyspace subscriptions, node restart, and active resharding.</span>
+            </div>
+            <div class="check">
+              <span class="badge">OK</span>
+              <span><b>TLS and ACL matrix</b><br>Standalone, Sentinel, and Cluster certification with CA verification and rejected credential checks.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="quickstart">
+        <div class="wrap split">
+          <div>
+            <p class="eyebrow">Integration shape</p>
+            <h2>Streams source to cdc-core events</h2>
+            <p class="lead">
+              The private gem exposes Redis-native source events and a
+              <code>cdc-core</code> adapter. Applications keep logical naming
+              and payload mapping explicit instead of pretending Redis has
+              relational tables.
+            </p>
+          </div>
+          <pre><code>require "cdc/redis/pro"
+
+source = CDC::Redis::Pro::Streams::Source.new(
+  connection: { url: ENV.fetch("REDIS_URL") },
+  streams: ["orders"],
+  group: "cdc",
+  consumer: "worker-1",
+  checkpoint_store: CDC::Redis::Pro::MemoryCheckpointStore.new,
+  dead_letter_stream: "orders.dead"
+)
+
+adapter = CDC::Redis::Pro::SourceAdapter.new
+
+source.start do |source_event|
+  change_event = adapter.normalize(source_event)
+  process(change_event)
+end</code></pre>
+        </div>
+      </section>
+
+      <section id="access">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Commercial access</p>
+              <h2>Private source, public discovery</h2>
+            </div>
+            <p>
+              The production source drivers, recovery logic, topology
+              management, and package releases are private. This public mirror
+              exists so teams can evaluate fit, link the capability surface,
+              and discover the project through search.
+            </p>
+          </div>
+
+          <div class="grid">
+            <article class="tile">
+              <h3>Package</h3>
+              <p>
+                Distributed as <code>cdc-redis-pro</code> for Ruby 4.0+ through
+                authenticated package access.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>Current phase</h3>
+              <p>
+                Phase 4 production topology is complete. Phase 5 replication
+                capture is deferred as a larger premium capability. Phase 6
+                product integration is in progress.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>Certification</h3>
+              <p>
+                Local Docker tasks validate Sentinel failover, Redis Cluster
+                routing and resharding, plus TLS/ACL behavior across supported
+                topologies.
+              </p>
+            </article>
+          </div>
+        </div>
       </section>
     </main>
+
+    <footer>
+      <div class="wrap">
+        <strong>cdc-redis-pro</strong> is a commercial Redis source driver
+        package for <code>cdc-core</code>. Redis is a trademark of Redis Ltd.
+        This documentation mirror does not include private implementation
+        source.
+      </div>
+    </footer>
   </body>
 </html>
