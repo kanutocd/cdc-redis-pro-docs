@@ -715,12 +715,12 @@
         <div class="wrap split">
           <div>
             <p class="eyebrow">Integration shape</p>
-            <h2>Streams source to cdc-core events</h2>
+            <h2>Streams source to bounded runner</h2>
             <p class="lead">
-              The private gem exposes Redis-native source events and a
-              <code>cdc-core</code> adapter. Applications keep logical naming
-              and payload mapping explicit instead of pretending Redis has
-              relational tables.
+              The private gem exposes Redis-native source events, a
+              <code>cdc-core</code> adapter, and a Phase 6
+              <code>SourceRunner</code> for bounded processing, lifecycle
+              health, and orchestrator-friendly error observation.
             </p>
           </div>
           <pre><code>require "cdc/redis/pro"
@@ -736,8 +736,14 @@ source = CDC::Redis::Pro::Streams::Source.new(
 
 adapter = CDC::Redis::Pro::SourceAdapter.new
 
-source.start do |source_event|
-  change_event = adapter.normalize(source_event)
+runner = CDC::Redis::Pro::SourceRunner.new(
+  source: source,
+  adapter: adapter,
+  queue_size: 16,
+  worker_count: 2
+)
+
+runner.start do |change_event, source_event|
   process(change_event)
 end</code></pre>
         </div>
@@ -771,7 +777,7 @@ end</code></pre>
               <p>
                 Phase 4 production topology is complete. Phase 5 replication
                 capture is deferred as a larger premium capability. Phase 6
-                product integration is in progress.
+                product integration has started with <code>SourceRunner</code>.
               </p>
             </article>
             <article class="tile">
