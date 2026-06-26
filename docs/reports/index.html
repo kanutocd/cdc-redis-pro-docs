@@ -83,6 +83,34 @@
         margin: 32px 0;
       }
 
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin: 28px 0 10px;
+      }
+
+      .metric {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .metric span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 760;
+      }
+
+      .metric strong {
+        display: block;
+        margin-top: 6px;
+        color: var(--ink);
+        font-size: 1.35rem;
+      }
+
       .tile {
         min-height: 100%;
         padding: 22px;
@@ -141,6 +169,7 @@
       }
 
       @media (max-width: 820px) {
+        .metrics,
         .grid {
           grid-template-columns: 1fr;
         }
@@ -161,6 +190,25 @@
         <a class="button" href="analytics/">Open analytics dashboard</a>
         <a class="button secondary" href="../">Back to cdc-redis-pro</a>
       </div>
+
+      <section class="metrics" aria-label="Benchmark result highlights">
+        <article class="metric">
+          <span>Peak runtime</span>
+          <strong>54.5k events/s</strong>
+        </article>
+        <article class="metric">
+          <span>Benchmarked events</span>
+          <strong>3.27M</strong>
+        </article>
+        <article class="metric">
+          <span>Benchmark failures</span>
+          <strong>0</strong>
+        </article>
+        <article class="metric">
+          <span>Chaos recovery</span>
+          <strong>12/12</strong>
+        </article>
+      </section>
 
       <section class="grid" aria-label="Report groups">
         <article class="tile">
@@ -191,6 +239,24 @@
           <p><a href="chaos-suite/20260619T121313Z/manifest.txt">Chaos suite manifest</a></p>
           <p><a href="chaos-suite/20260619T121313Z/streams/chaos-20260619T121441Z.md">Streams chaos report</a></p>
         </article>
+      </section>
+
+      <section class="list">
+        <h2>Result interpretation</h2>
+        <p>
+          The generated analytics show the downstream orchestrator layer
+          reaching a 54.5k events/s synthetic runtime peak, a 17.6k events/s
+          Redis Streams peak, and a 20.0k events/s pgoutput+Redis peak. These
+          are <code>HybridRuntime</code> processing results after source
+          acquisition; complete-pipeline discussions should use the
+          end-to-end fields in the CSV tables.
+        </p>
+        <p>
+          The soak and chaos artifacts provide the stability side of the same
+          claim: completed benchmark matrices report zero processing failures,
+          and the published chaos suite recovered all 12 outage/restart
+          scenarios with post-recovery delivery checks.
+        </p>
       </section>
 
       <section class="list">

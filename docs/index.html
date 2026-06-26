@@ -413,6 +413,34 @@
         gap: 10px;
       }
 
+      .result-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin: 18px 0 4px;
+      }
+
+      .result {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fcfcfa;
+      }
+
+      .result span {
+        display: block;
+        color: var(--quiet);
+        font-size: 0.82rem;
+        font-weight: 760;
+      }
+
+      .result strong {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink);
+        font-size: 1.22rem;
+      }
+
       .check {
         display: grid;
         grid-template-columns: 24px minmax(0, 1fr);
@@ -460,6 +488,7 @@
 
         .hero-grid,
         .split,
+        .result-grid,
         .grid {
           grid-template-columns: 1fr;
         }
@@ -820,6 +849,24 @@ end</code></pre>
               SVG charts. The dashboard is produced from the report CSV files
               by <code>bundle exec rake benchmark:analyze</code>.
             </p>
+            <div class="result-grid" aria-label="Published benchmark results">
+              <div class="result">
+                <span>Peak runtime</span>
+                <strong>54.5k events/s</strong>
+              </div>
+              <div class="result">
+                <span>Redis Streams peak</span>
+                <strong>17.6k events/s</strong>
+              </div>
+              <div class="result">
+                <span>pgoutput+Redis peak</span>
+                <strong>20.0k events/s</strong>
+              </div>
+              <div class="result">
+                <span>Chaos recovery</span>
+                <strong>12/12 scenarios</strong>
+              </div>
+            </div>
             <div class="actions">
               <a class="button" href="reports/analytics/">Open dashboard</a>
               <a class="button secondary" href="reports/">Browse reports</a>
@@ -837,6 +884,10 @@ end</code></pre>
             <div class="check">
               <span class="badge">OK</span>
               <span><b>Chaos recovery</b><br>Redis and PostgreSQL outage/restart runs with recovery timing and post-recovery delivery checks.</span>
+            </div>
+            <div class="check">
+              <span class="badge">OK</span>
+              <span><b>Runtime semantics</b><br>Throughput measures <code>HybridRuntime</code> processing after source acquisition, so complete-pipeline claims use end-to-end figures.</span>
             </div>
           </div>
         </div>
