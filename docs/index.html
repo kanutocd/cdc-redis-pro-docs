@@ -523,6 +523,7 @@
           <a href="#capabilities">Capabilities</a>
           <a href="#guarantees">Guarantees</a>
           <a href="#topologies">Topologies</a>
+          <a href="#orchestrator">Orchestrator</a>
           <a href="#access">Access</a>
         </nav>
       </div>
@@ -715,12 +716,14 @@
         <div class="wrap split">
           <div>
             <p class="eyebrow">Integration shape</p>
-            <h2>Streams source to bounded runner</h2>
+            <h2>Fast Redis source to bounded runner</h2>
             <p class="lead">
               The private gem exposes Redis-native source events, a
               <code>cdc-core</code> adapter, and a Phase 6
               <code>SourceRunner</code> for bounded processing, lifecycle
-              health, and orchestrator-friendly error observation.
+              health, and orchestrator-friendly error observation. Redis is
+              positioned as the fast upstream signal layer; PostgreSQL remains
+              the stronger durability baseline.
             </p>
           </div>
           <pre><code>require "cdc/redis/pro"
@@ -746,6 +749,62 @@ runner = CDC::Redis::Pro::SourceRunner.new(
 runner.start do |change_event, source_event|
   process(change_event)
 end</code></pre>
+        </div>
+      </section>
+
+      <section id="orchestrator">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Phase 6 proof layer</p>
+              <h2>Redis feed, cdc-orchestrator-pro downstream</h2>
+            </div>
+            <p>
+              Phase 6 showcases the pairing: a very fast Redis upstream source
+              feeding <code>cdc-orchestrator-pro</code> downstream primitives.
+              The public benchmark harness exercises <code>HybridRuntime</code>
+              directly with cdc-parallel Ractors, cdc-concurrent fiber fan-out,
+              and Ractor-local Redis connection pools.
+            </p>
+          </div>
+
+          <div class="grid">
+            <article class="tile">
+              <h3>Inception pool</h3>
+              <p>
+                The runtime shape is source to <code>CDC::Core::ChangeEvent</code>,
+                partition router, prewarmed Ractor pool, Ractor-local Redis
+                pool, and concurrent fiber fan-out. This keeps the less durable
+                Redis signal separated from the heavier downstream execution
+                layer.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>Benchmark matrix</h3>
+              <p>
+                The public harness varies 1, 3, and 7 Ractors; 1, 5, and 10
+                Redis connections per Ractor; 10, 50, and 100 fibers; and
+                ordered versus unordered delivery. It reports throughput,
+                latency, CPU, RSS, Redis ops, mailbox depth, and failures.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>Observed run</h3>
+              <p>
+                The latest pgoutput-to-Redis matrix completed 54 of 54 stable
+                runs with a peak of 19,977 events/s. A Streams soak processed
+                1.34M events over five minutes with 0 failures and 2.1%
+                median throughput degradation.
+              </p>
+            </article>
+          </div>
+
+          <div class="warning">
+            Redis Streams, Pub/Sub, and keyspace notifications are intentionally
+            presented with different replay and loss semantics. The benchmark
+            demonstrates orchestration capacity; it does not claim Redis
+            Pub/Sub or keyspace notifications are as durable as PostgreSQL WAL.
+          </div>
         </div>
       </section>
 
@@ -777,7 +836,9 @@ end</code></pre>
               <p>
                 Phase 4 production topology is complete. Phase 5 replication
                 capture is deferred as a larger premium capability. Phase 6
-                product integration has started with <code>SourceRunner</code>.
+                product integration now covers <code>SourceRunner</code>,
+                CLI health and metrics, Rails boot integration, and
+                orchestrator-focused benchmark positioning.
               </p>
             </article>
             <article class="tile">
