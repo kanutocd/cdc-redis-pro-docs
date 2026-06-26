@@ -835,6 +835,25 @@ end</code></pre>
             demonstrates orchestration capacity; it does not claim Redis
             Pub/Sub or keyspace notifications are as durable as PostgreSQL WAL.
           </div>
+
+          <pre><code>sink = CDC::Redis::Pro::Orchestrator.redis_sink(
+  connection: { url: ENV.fetch("REDIS_URL") },
+  redis_connections: 5,
+  key_prefix: "orders_projection",
+  id_field: "stream_id",
+  value_field: "payload"
+)
+
+runtime = CDC::Redis::Pro::Orchestrator.runtime(
+  processor: sink,
+  ractors: 3,
+  fiber_concurrency: 50,
+  timeout: 30.0,
+  preserve_order: true,
+  partition_strategy: :round_robin
+)
+
+results = runtime.process_many(change_events)</code></pre>
         </div>
       </section>
 
