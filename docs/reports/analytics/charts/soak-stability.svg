@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1060" role="img">
+  <style>
+    text{font-family:Inter,ui-sans-serif,system-ui,sans-serif;fill:#e2e8f0}.title{font-size:28px;font-weight:750}
+    .subtitle{font-size:15px;fill:#94a3b8}.label{font-size:18px;font-weight:650}.small-label{font-size:13px}
+    .value{font-size:15px;text-anchor:end}.track{fill:#1e293b}.grid{stroke:#334155;stroke-width:1}
+    .axis-value{font-size:12px;fill:#94a3b8;text-anchor:end}.axis-label{font-size:13px;fill:#94a3b8}
+    .legend{font-size:13px;fill:#cbd5e1}
+  </style>
+  <rect width="100%" height="100%" rx="28" fill="#0f172a"/>
+  <text x="32" y="45" class="title">Soak stability</text>
+  <text x="32" y="72" class="subtitle">RSS growth and throughput degradation for completed soak runs</text>
+  <text x="25" y="128" class="small-label">streams · 5.0m</text>
+<rect x="310" y="110" width="272.3842347119123" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="130" width="15.421174276314195" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="183" class="small-label">cpu_redis · 1.0h</text>
+<rect x="310" y="165" width="181.08209614704842" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="185" width="0.0" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="238" class="small-label">synthetic · 1.0h</text>
+<rect x="310" y="220" width="444.16092258748677" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="240" width="2.3064145775192877" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="293" class="small-label">cpu_redis · 1.0h</text>
+<rect x="310" y="275" width="49.542682926829265" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="295" width="0.0" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="348" class="small-label">pgoutput_redis · 1.0h</text>
+<rect x="310" y="330" width="647.2715623895369" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="350" width="4.846816881694664" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="403" class="small-label">pubsub · 1.0h</text>
+<rect x="310" y="385" width="444.01732060798867" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="405" width="0.0" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="458" class="small-label">streams · 1.0h</text>
+<rect x="310" y="440" width="372.1301696712619" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="460" width="14.972537186115835" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="513" class="small-label">synthetic · 1.0h</text>
+<rect x="310" y="495" width="404.09597030752917" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="515" width="0.0" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="568" class="small-label">cpu_redis · 5.1m</text>
+<rect x="310" y="550" width="70.04904559915164" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="570" width="28.95104513583542" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="623" class="small-label">pgoutput_redis · 5.2m</text>
+<rect x="310" y="605" width="431.7537115588547" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="625" width="0.0" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="678" class="small-label">pubsub · 5.0m</text>
+<rect x="310" y="660" width="230.85454224107457" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="680" width="0.0" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="733" class="small-label">streams · 5.0m</text>
+<rect x="310" y="715" width="295.33183103570167" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="735" width="0.0" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="788" class="small-label">synthetic · 5.0m</text>
+<rect x="310" y="770" width="371.756804524567" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="790" width="1.7667195958632587" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="843" class="small-label">pgoutput_redis · 1.0h</text>
+<rect x="310" y="825" width="650.0" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="845" width="0.0" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="898" class="small-label">streams · 8.0h</text>
+<rect x="310" y="880" width="478.53923647932135" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="900" width="80.12243938826771" height="15" rx="7" fill="#ef4444"/>
+<text x="25" y="953" class="small-label">synthetic · 8.0h</text>
+<rect x="310" y="935" width="595.0291622481442" height="15" rx="7" fill="#22c55e"/>
+<rect x="310" y="955" width="0.0" height="15" rx="7" fill="#ef4444"/>
+<circle cx="120" cy="1035" r="6" fill="#22c55e"/><text x="132" y="1040" class="legend">RSS growth MiB</text><circle cx="350" cy="1035" r="6" fill="#ef4444"/><text x="362" y="1040" class="legend">Throughput degradation %</text>
+</svg>

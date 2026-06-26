@@ -524,6 +524,7 @@
           <a href="#guarantees">Guarantees</a>
           <a href="#topologies">Topologies</a>
           <a href="#orchestrator">Orchestrator</a>
+          <a href="#reports">Reports</a>
           <a href="#access">Access</a>
         </nav>
       </div>
@@ -804,6 +805,39 @@ end</code></pre>
             presented with different replay and loss semantics. The benchmark
             demonstrates orchestration capacity; it does not claim Redis
             Pub/Sub or keyspace notifications are as durable as PostgreSQL WAL.
+          </div>
+        </div>
+      </section>
+
+      <section id="reports">
+        <div class="wrap split">
+          <div>
+            <p class="eyebrow">Public evidence</p>
+            <h2>Benchmark reports and analytics</h2>
+            <p class="lead">
+              The public reports include generated analytics, raw CSV data,
+              Markdown summaries, soak artifacts, chaos recovery outputs, and
+              SVG charts. The dashboard is produced from the report CSV files
+              by <code>bundle exec rake benchmark:analyze</code>.
+            </p>
+            <div class="actions">
+              <a class="button" href="reports/analytics/">Open dashboard</a>
+              <a class="button secondary" href="reports/">Browse reports</a>
+            </div>
+          </div>
+          <div class="panel checks">
+            <div class="check">
+              <span class="badge">OK</span>
+              <span><b>327 benchmark configurations</b><br>Throughput, latency, CPU, RSS, Redis ops, and failure counts from the matrix.</span>
+            </div>
+            <div class="check">
+              <span class="badge">OK</span>
+              <span><b>Soak windows</b><br>Five-minute, one-hour, and overnight artifacts where completed suites are available.</span>
+            </div>
+            <div class="check">
+              <span class="badge">OK</span>
+              <span><b>Chaos recovery</b><br>Redis and PostgreSQL outage/restart runs with recovery timing and post-recovery delivery checks.</span>
+            </div>
           </div>
         </div>
       </section>

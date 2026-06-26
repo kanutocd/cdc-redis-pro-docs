@@ -1,0 +1,9 @@
+recorded_at,phase,scenario,service,action,stage,events,ractors,redis_connections,fiber_concurrency,fault_delay_seconds,outage_seconds,baseline_events_per_second,fault_duration_seconds,fault_injection_error,faulted_run_completed,faulted_run_seconds,faulted_failures,faulted_error_class,faulted_error_message,faulted_deliveries,faulted_event_loss,recovered,recovery_seconds,recovery_attempts,recovered_events_per_second,recovery_throughput_change_percent,recovered_deliveries,recovered_event_loss,failures,ordering_failures,ruby_version,orchestrator_version
+2026-06-19T12:19:27Z,pgoutput_redis,redis_restart,redis,restart,runtime,10000,3,5,50,0.05,3.0,6624.872251180382,2.6697862739965785,,true,26.596175836995826,1308,,,8692,1308,true,18.68770405399846,1,6102.102327594491,-7.891018932368797,10000,0,0,0,4.0.5,0.1.0
+2026-06-19T12:20:20Z,pgoutput_redis,redis_outage,redis,outage,runtime,10000,3,5,50,0.05,3.0,6105.2204213331115,5.680896680991282,,true,16.07928482700663,10000,,,0,10000,true,20.931190453993622,1,6708.798138121145,9.886255943831074,10000,0,0,0,4.0.5,0.1.0
+2026-06-19T12:21:02Z,pgoutput_redis,postgres_restart,postgres,restart,source,10000,3,5,50,0.05,3.0,8357.216747525548,3.0932755330140935,,false,1.1125735050009098,0,PG::ConnectionBad,"connection to server at ""127.0.0.1"", port 55432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+",0,10000,true,17.658129262010334,1,11765.226140577934,40.7792390219082,10000,0,0,0,4.0.5,0.1.0
+2026-06-19T12:21:38Z,pgoutput_redis,postgres_outage,postgres,outage,source,10000,3,5,50,0.05,3.0,12642.641503498697,5.841519875990343,,false,0.8261879780038726,0,PG::ConnectionBad,"connection to server at ""127.0.0.1"", port 55432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+",0,10000,true,20.34947210700193,1,12303.598063928364,-2.6817452624635933,10000,0,0,0,4.0.5,0.1.0

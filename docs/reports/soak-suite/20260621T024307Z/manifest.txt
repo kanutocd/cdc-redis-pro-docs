@@ -1,0 +1,15 @@
+started_at=20260621T024307Z
+phases=pgoutput_redis
+windows=1h
+planned_duration_seconds=3600
+events_per_batch=10000
+ractors=3
+redis_connections_per_ractor=5
+fiber_concurrency=50
+preserve_order=true
+cpu_iterations=2000
+warmup_batches=1
+max_batches=unlimited
+finished_at=20260621T034342Z
+completed_runs=1
+failed_runs=0

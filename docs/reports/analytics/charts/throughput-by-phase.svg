@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 500" role="img">
+  <style>
+    text{font-family:Inter,ui-sans-serif,system-ui,sans-serif;fill:#e2e8f0}.title{font-size:28px;font-weight:750}
+    .subtitle{font-size:15px;fill:#94a3b8}.label{font-size:18px;font-weight:650}.small-label{font-size:13px}
+    .value{font-size:15px;text-anchor:end}.track{fill:#1e293b}.grid{stroke:#334155;stroke-width:1}
+    .axis-value{font-size:12px;fill:#94a3b8;text-anchor:end}.axis-label{font-size:13px;fill:#94a3b8}
+    .legend{font-size:13px;fill:#cbd5e1}
+  </style>
+  <rect width="100%" height="100%" rx="28" fill="#0f172a"/>
+  <text x="32" y="45" class="title">Runtime throughput by phase</text>
+  <text x="32" y="72" class="subtitle">Median and peak events/second across all reported configurations</text>
+  <text x="32" y="143" class="label">synthetic</text>
+<rect x="280" y="120" width="720" height="32" rx="16" class="track"/>
+<rect x="280" y="120" width="303.294706635239" height="32" rx="16" fill="#8b5cf6"/>
+<line x1="1000.0" y1="115" x2="1000.0" y2="157" stroke="#f8fafc" stroke-width="3"/>
+<text x="1018" y="143" class="value">23.0k</text>
+<text x="32" y="213" class="label">pgoutput_redis</text>
+<rect x="280" y="190" width="720" height="32" rx="16" class="track"/>
+<rect x="280" y="190" width="168.5562443906242" height="32" rx="16" fill="#ef4444"/>
+<line x1="543.9819198239525" y1="185" x2="543.9819198239525" y2="227" stroke="#f8fafc" stroke-width="3"/>
+<text x="1018" y="213" class="value">12.8k</text>
+<text x="32" y="283" class="label">streams</text>
+<rect x="280" y="260" width="720" height="32" rx="16" class="track"/>
+<rect x="280" y="260" width="159.14162813119373" height="32" rx="16" fill="#22c55e"/>
+<line x1="512.5371383041679" y1="255" x2="512.5371383041679" y2="297" stroke="#f8fafc" stroke-width="3"/>
+<text x="1018" y="283" class="value">12.0k</text>
+<text x="32" y="353" class="label">pubsub</text>
+<rect x="280" y="330" width="720" height="32" rx="16" class="track"/>
+<rect x="280" y="330" width="156.96047501802863" height="32" rx="16" fill="#06b6d4"/>
+<line x1="541.3739124807788" y1="325" x2="541.3739124807788" y2="367" stroke="#f8fafc" stroke-width="3"/>
+<text x="1018" y="353" class="value">11.9k</text>
+<text x="32" y="423" class="label">cpu_redis</text>
+<rect x="280" y="400" width="720" height="32" rx="16" class="track"/>
+<rect x="280" y="400" width="5.727649286443783" height="32" rx="16" fill="#f59e0b"/>
+<line x1="287.82735722913674" y1="395" x2="287.82735722913674" y2="437" stroke="#f8fafc" stroke-width="3"/>
+<text x="1018" y="423" class="value">433.4</text>
+
+</svg>

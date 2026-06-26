@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>cdc-orchestrator benchmark reports | cdc-redis-pro</title>
+    <meta
+      name="description"
+      content="Public benchmark, soak, chaos, and analytics reports for cdc-orchestrator-pro with Redis source and sink workloads."
+    >
+    <link rel="canonical" href="https://kanutocd.github.io/cdc-redis-pro-docs/reports/">
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f5f0;
+        --surface: #ffffff;
+        --text: #17212b;
+        --muted: #53606d;
+        --line: #d8ddd5;
+        --primary: #0f766e;
+        --primary-dark: #115e59;
+        --ink: #101827;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      main {
+        width: min(1040px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 56px 0 76px;
+      }
+
+      a {
+        color: var(--primary-dark);
+        text-decoration-thickness: 0.08em;
+        text-underline-offset: 0.2em;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin-bottom: 18px;
+        color: var(--ink);
+        font-size: clamp(2.3rem, 7vw, 5rem);
+        line-height: 0.98;
+        letter-spacing: 0;
+      }
+
+      .eyebrow {
+        margin-bottom: 14px;
+        color: var(--primary-dark);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .lead {
+        max-width: 72ch;
+        color: var(--muted);
+        font-size: 1.08rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin: 32px 0;
+      }
+
+      .tile {
+        min-height: 100%;
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .tile h2,
+      .tile h3 {
+        margin-bottom: 10px;
+        color: var(--ink);
+        font-size: 1.08rem;
+      }
+
+      .tile p,
+      li {
+        color: var(--muted);
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 10px 15px;
+        border-radius: 8px;
+        background: var(--primary);
+        color: #fff;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .button.secondary {
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--primary-dark);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 26px 0 10px;
+      }
+
+      .list {
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      }
+
+      @media (max-width: 820px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">Public performance evidence</p>
+      <h1>cdc-orchestrator benchmark reports</h1>
+      <p class="lead">
+        Static benchmark evidence for <code>cdc-orchestrator-pro</code> with
+        Redis workloads. The dashboard is generated from the CSV files in this
+        directory by <code>bundle exec rake benchmark:analyze</code>.
+      </p>
+
+      <div class="actions">
+        <a class="button" href="analytics/">Open analytics dashboard</a>
+        <a class="button secondary" href="../">Back to cdc-redis-pro</a>
+      </div>
+
+      <section class="grid" aria-label="Report groups">
+        <article class="tile">
+          <h2>Benchmark matrix</h2>
+          <p>
+            Throughput, latency, CPU, RSS, Redis ops, mailbox depth, and
+            failures across synthetic, Pub/Sub, Streams, CPU+Redis, and
+            pgoutput+Redis phases.
+          </p>
+          <p><a href="benchmark-20260618T142955Z.md">Latest Markdown matrix</a></p>
+          <p><a href="benchmark-20260618T142955Z.csv">Latest CSV matrix</a></p>
+        </article>
+        <article class="tile">
+          <h2>Soak stability</h2>
+          <p>
+            Repeated batch runs with RSS, GC, throughput degradation, and
+            stability classification for longer-running workload windows.
+          </p>
+          <p><a href="soak-20260619T113915Z.md">Streams smoke soak report</a></p>
+          <p><a href="soak-suite/">Soak suite artifacts</a></p>
+        </article>
+        <article class="tile">
+          <h2>Chaos recovery</h2>
+          <p>
+            Redis and PostgreSQL restart/outage scenarios with recovery time,
+            attempts, faulted-batch loss, and post-recovery delivery checks.
+          </p>
+          <p><a href="chaos-suite/20260619T121313Z/manifest.txt">Chaos suite manifest</a></p>
+          <p><a href="chaos-suite/20260619T121313Z/streams/chaos-20260619T121441Z.md">Streams chaos report</a></p>
+        </article>
+      </section>
+
+      <section class="list">
+        <h2>Published scope</h2>
+        <p>
+          This public snapshot includes generated analytics, CSV data, Markdown
+          reports, suite manifests, and SVG charts. Runtime log files are not
+          published because they contain local filesystem paths from the
+          benchmark host.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

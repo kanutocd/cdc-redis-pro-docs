@@ -1,0 +1,12 @@
+started_at=20260619T121313Z
+phases=pubsub streams cpu_redis pgoutput_redis
+events=10000
+ractors=3
+redis_connections_per_ractor=5
+fiber_concurrency=50
+fault_delay_seconds=0.05
+outage_seconds=3
+recovery_timeout_seconds=60
+finished_at=20260619T122138Z
+completed_phases=4
+failed_phases=0
