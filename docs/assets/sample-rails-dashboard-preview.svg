@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
+  <title id="title">CDC Pro for Redis Rails dashboard preview</title>
+  <desc id="desc">A screenshot-style preview of the Rails sample dashboard with navigation, mode panels, and local docs controls.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#f6f7f4"/>
+      <stop offset="100%" stop-color="#edf4f1"/>
+    </linearGradient>
+    <linearGradient id="topbar" x1="0" x2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#0f172a" flood-opacity=".16"/>
+    </filter>
+  </defs>
+
+  <rect width="1400" height="900" fill="url(#bg)"/>
+  <rect x="120" y="70" width="1160" height="760" rx="28" fill="#ffffff" filter="url(#shadow)"/>
+
+  <rect x="120" y="70" width="1160" height="72" rx="28" fill="url(#topbar)"/>
+  <circle cx="168" cy="106" r="8" fill="#f87171"/>
+  <circle cx="194" cy="106" r="8" fill="#fbbf24"/>
+  <circle cx="220" cy="106" r="8" fill="#34d399"/>
+  <rect x="290" y="90" width="240" height="32" rx="16" fill="#111827" opacity=".55"/>
+  <rect x="292" y="94" width="112" height="24" rx="12" fill="#1f2937"/>
+  <text x="306" y="111" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#e5e7eb">CDC Pro for Redis dashboard</text>
+  <text x="1034" y="112" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="14" fill="#cbd5e1">localhost:3000</text>
+
+  <text x="164" y="194" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#0f172a">Sample app</text>
+  <text x="164" y="246" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="52" font-weight="800" fill="#0f172a">CDC Pro for Redis dashboard</text>
+  <text x="164" y="292" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="22" fill="#425466">Local docs, source modes, and bounded demo runs for licensed customers.</text>
+
+  <rect x="164" y="336" width="164" height="52" rx="10" fill="#0f766e"/>
+  <text x="196" y="369" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#fff">Open streams</text>
+  <rect x="342" y="336" width="164" height="52" rx="10" fill="#fff" stroke="#d9dfd8"/>
+  <text x="377" y="369" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#115e59">Open docs</text>
+  <rect x="520" y="336" width="198" height="52" rx="10" fill="#fff" stroke="#d9dfd8"/>
+  <text x="551" y="369" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#115e59">License notes</text>
+
+  <rect x="164" y="432" width="296" height="168" rx="14" fill="#f8faf9" stroke="#d9dfd8"/>
+  <text x="188" y="468" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#0f172a">Redis Streams</text>
+  <text x="188" y="502" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="15" fill="#5b6672">Recoverable stream replay</text>
+  <text x="188" y="528" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="15" fill="#5b6672">consumer groups and recovery</text>
+  <rect x="188" y="548" width="110" height="28" rx="14" fill="#dcfce7"/>
+  <text x="208" y="567" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#166534">succeeded</text>
+
+  <rect x="484" y="432" width="296" height="168" rx="14" fill="#f8faf9" stroke="#d9dfd8"/>
+  <text x="508" y="468" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#0f172a">Pub/Sub</text>
+  <text x="508" y="502" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="15" fill="#5b6672">Low-latency ephemeral delivery</text>
+  <text x="508" y="528" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="15" fill="#5b6672">with explicit loss-window</text>
+  <rect x="508" y="548" width="96" height="28" rx="14" fill="#dbeafe"/>
+  <text x="530" y="567" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#1d4ed8">running</text>
+
+  <rect x="804" y="432" width="296" height="168" rx="14" fill="#f8faf9" stroke="#d9dfd8"/>
+  <text x="828" y="468" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="18" font-weight="700" fill="#0f172a">Orchestrator</text>
+  <text x="828" y="502" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="15" fill="#5b6672">Nested runtime with worker-local</text>
+  <text x="828" y="528" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="15" fill="#5b6672">resources and failure policy</text>
+  <rect x="828" y="548" width="94" height="28" rx="14" fill="#fee2e2"/>
+  <text x="850" y="567" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#991b1b">queued</text>
+
+  <rect x="164" y="642" width="936" height="122" rx="16" fill="#111827"/>
+  <text x="188" y="684" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" fill="#d1fae5">bundle exec rake docs:generate</text>
+  <text x="188" y="718" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" fill="#cbd5e1">public/docs/api/index.html</text>
+  <text x="188" y="752" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="18" fill="#93c5fd">run_orchestrator_path</text>
+
+  <rect x="1140" y="642" width="116" height="122" rx="16" fill="#0f766e"/>
+  <text x="1166" y="694" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="18" font-weight="800" fill="#fff">4 modes</text>
+  <text x="1164" y="725" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="16" fill="#d1fae5">1 dashboard</text>
+</svg>

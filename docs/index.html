@@ -138,6 +138,20 @@
         text-decoration: none;
       }
 
+      .repo-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .repo-link svg {
+        width: 16px;
+        height: 16px;
+        flex: 0 0 auto;
+      }
+
       main {
         padding-bottom: 72px;
       }
@@ -343,6 +357,57 @@
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 14px;
+      }
+
+      .examples-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+        gap: 24px;
+        align-items: start;
+      }
+
+      .preview {
+        margin: 0;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--surface);
+        box-shadow: 0 10px 24px rgba(16, 24, 39, 0.08);
+      }
+
+      .preview img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .preview figcaption {
+        padding: 12px 14px 14px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .recording-list {
+        display: grid;
+        gap: 10px;
+        margin: 16px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .recording-list li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 14px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fff;
+      }
+
+      .recording-list strong {
+        color: var(--ink);
       }
 
       .tile {
@@ -565,10 +630,24 @@
         <nav aria-label="Page sections">
           <a href="#features">Features</a>
           <a href="#orchestration">Orchestration</a>
+          <a href="#examples">Examples</a>
           <a href="#evidence">Benchmarks</a>
           <a href="#license">License</a>
           <a href="#install">Install</a>
           <a href="#support">Support</a>
+          <a
+            class="repo-link"
+            href="https://github.com/kanutocd/cdc-redis-pro-docs"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open GitHub repository in a new tab"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3.2c-4.9 0-8.8 3.9-8.8 8.8 0 3.9 2.5 7.2 6 8.4.4.1.5-.2.5-.4v-1.5c-2.4.5-2.9-1-2.9-1-.4-1-.9-1.3-.9-1.3-.8-.5.1-.5.1-.5.9.1 1.3.9 1.3.9.8 1.3 2.1.9 2.7.7.1-.6.3-.9.5-1.1-1.9-.2-3.9-.9-3.9-4.1 0-.9.3-1.7.8-2.3-.1-.2-.4-1.1.1-2.3 0 0 .7-.2 2.4.8.7-.2 1.5-.3 2.3-.3s1.6.1 2.3.3c1.7-1 2.4-.8 2.4-.8.5 1.2.2 2.1.1 2.3.5.6.8 1.4.8 2.3 0 3.2-2 3.9-3.9 4.1.3.2.6.8.6 1.7v2.4c0 .2.1.5.5.4 3.5-1.2 6-4.5 6-8.4 0-4.9-3.9-8.8-8.8-8.8Z"/>
+            </svg>
+            <span>GitHub repo</span>
+            <span aria-hidden="true">↗</span>
+          </a>
         </nav>
       </div>
     </header>
@@ -589,8 +668,8 @@
             <div class="actions">
               <a class="button" href="#license">Get a license</a>
               <a class="button secondary" href="reports/">View benchmark reports</a>
-              <a class="button secondary" href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-pipeline">Open cdc-redis-pro-pipeline Ruby example app</a>
-              <a class="button secondary" href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-rails-dashboard">Open cdc-redis-pro-rails-dashboard Rails example app</a>
+              <a class="button secondary" href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-pipeline" target="_blank" rel="noreferrer">Open cdc-redis-pro-pipeline Ruby example app ↗</a>
+              <a class="button secondary" href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-rails-dashboard" target="_blank" rel="noreferrer">Open cdc-redis-pro-rails-dashboard Rails example app ↗</a>
               <a class="button secondary" href="reports/analytics/">Open analytics dashboard</a>
             </div>
             <p class="hero-note">
@@ -694,7 +773,7 @@
                 generation.
               </p>
               <p>
-                <a href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-pipeline">View example</a>
+                  <a href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-pipeline" target="_blank" rel="noreferrer">View example ↗</a>
               </p>
               <p>
                 <a href="https://asciinema.org/a/ZgYkH5QwZLDFJ6YL">Streams</a>,
@@ -716,6 +795,65 @@
                 <a href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-rails-dashboard">View example</a>
               </p>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="examples">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Example applications</p>
+              <h2>Public demos for discovery and onboarding</h2>
+            </div>
+            <p>
+              The landing page should put the two working samples in front of
+              people who want to inspect the bundle, not hide them behind the
+              benchmarks.
+            </p>
+          </div>
+
+          <div class="examples-grid">
+            <figure class="preview">
+              <img src="assets/sample-rails-dashboard-preview.svg" alt="Sample Rails dashboard preview">
+              <figcaption>
+                Rails dashboard sample with mode pages, bounded demo runs, and
+                local docs.
+              </figcaption>
+            </figure>
+
+            <div>
+              <article class="tile" style="margin-bottom: 18px;">
+                <h3>Standalone pipeline sample</h3>
+                <p>
+                  Worker-local upstream pooling, source mode walkthroughs, and
+                  downstream orchestration in a plain Ruby app.
+                </p>
+                <p>
+                  <a href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-pipeline">Open example</a>
+                </p>
+                <ul class="recording-list">
+                  <li><strong>Streams</strong> <a href="https://asciinema.org/a/ZgYkH5QwZLDFJ6YL" target="_blank" rel="noreferrer">Open recording ↗</a></li>
+                  <li><strong>Pub/Sub</strong> <a href="https://asciinema.org/a/nnV4iiRX6Pw0YEag" target="_blank" rel="noreferrer">Open recording ↗</a></li>
+                  <li><strong>Sharded Pub/Sub</strong> <a href="https://asciinema.org/a/5hyyHBrML12Bu6z4" target="_blank" rel="noreferrer">Open recording ↗</a></li>
+                  <li><strong>Keyspace</strong> <a href="https://asciinema.org/a/H6mhFGoUTTiNmj6x" target="_blank" rel="noreferrer">Open recording ↗</a></li>
+                </ul>
+              </article>
+
+              <article class="tile">
+                <h3>Rails dashboard sample</h3>
+                <p>
+                  A browser-based demo surface for the same licensed bundle,
+                  with local docs, mode pages, and bounded run controls.
+                </p>
+                <p>
+                  <a href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-rails-dashboard" target="_blank" rel="noreferrer">Open example ↗</a>
+                </p>
+                <p>
+                  <a href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-rails-dashboard/" target="_blank" rel="noreferrer">Browse sample repo ↗</a>
+                </p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
