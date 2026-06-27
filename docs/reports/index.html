@@ -247,8 +247,9 @@
           The generated analytics show the downstream orchestrator layer
           reaching a 54.5k events/s synthetic runtime peak, a 17.6k events/s
           Redis Streams peak, and a 20.0k events/s pgoutput+Redis peak. These
-          are <code>HybridRuntime</code> processing results after source
-          acquisition; complete-pipeline discussions should use the
+          are <code>NestedRuntime</code> processing results with worker-local
+          <code>LocalResourcePool</code> Redis clients after source acquisition;
+          complete-pipeline discussions should use the
           end-to-end fields in the CSV tables.
         </p>
         <p>

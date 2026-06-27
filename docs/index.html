@@ -792,9 +792,9 @@ end</code></pre>
             <p>
               Phase 6 showcases the pairing: a very fast Redis upstream source
               feeding <code>cdc-orchestrator-pro</code> downstream primitives.
-              The public benchmark harness exercises <code>HybridRuntime</code>
+              The public benchmark harness exercises <code>NestedRuntime</code>
               directly with cdc-parallel Ractors, cdc-concurrent fiber fan-out,
-              and Ractor-local Redis connection pools.
+              and worker-local <code>LocalResourcePool</code> Redis clients.
             </p>
           </div>
 
@@ -803,10 +803,10 @@ end</code></pre>
               <h3>Inception pool</h3>
               <p>
                 The runtime shape is source to <code>CDC::Core::ChangeEvent</code>,
-                partition router, prewarmed Ractor pool, Ractor-local Redis
-                pool, and concurrent fiber fan-out. This keeps the less durable
-                Redis signal separated from the heavier downstream execution
-                layer.
+                partition router, prewarmed Ractor workers, worker-local
+                <code>LocalResourcePool</code> Redis clients, and concurrent
+                fiber fan-out. This keeps the less durable Redis signal
+                separated from the heavier downstream execution layer.
               </p>
             </article>
             <article class="tile">
@@ -857,6 +857,7 @@ results = runtime.process_many(change_events)</code></pre>
 
           <pre><code>bundle exec cdc-redis-pro orchestrate \
   --redis-url "$REDIS_URL" \
+  --batch-size 1000 \
   --ractors 3 \
   --redis-connections 5 \
   --fibers 50 \
@@ -865,6 +866,13 @@ results = runtime.process_many(change_events)</code></pre>
   --key-prefix orders_projection \
   --id-field stream_id \
   --value-field payload</code></pre>
+
+          <pre><code>bundle exec cdc-redis-pro pipe \
+  --config config/redis-source.yml \
+  --redis-url "$REDIS_URL" \
+  --ractors 3 \
+  --redis-connections 5 \
+  --fibers 50</code></pre>
         </div>
       </section>
 
@@ -917,7 +925,7 @@ results = runtime.process_many(change_events)</code></pre>
             </div>
             <div class="check">
               <span class="badge">OK</span>
-              <span><b>Runtime semantics</b><br>Throughput measures <code>HybridRuntime</code> processing after source acquisition, so complete-pipeline claims use end-to-end figures.</span>
+              <span><b>Runtime semantics</b><br>Throughput measures <code>NestedRuntime</code> processing with <code>LocalResourcePool</code> resources after source acquisition, so complete-pipeline claims use end-to-end figures.</span>
             </div>
           </div>
         </div>
