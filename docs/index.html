@@ -854,6 +854,17 @@ runtime = CDC::Redis::Pro::Orchestrator.runtime(
 )
 
 results = runtime.process_many(change_events)</code></pre>
+
+          <pre><code>bundle exec cdc-redis-pro orchestrate \
+  --redis-url "$REDIS_URL" \
+  --ractors 3 \
+  --redis-connections 5 \
+  --fibers 50 \
+  --preserve-order true \
+  --partition-strategy round_robin \
+  --key-prefix orders_projection \
+  --id-field stream_id \
+  --value-field payload</code></pre>
         </div>
       </section>
 
