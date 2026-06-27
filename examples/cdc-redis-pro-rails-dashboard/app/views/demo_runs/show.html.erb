@@ -1,0 +1,42 @@
+<section class="stack">
+  <div class="panel">
+    <p class="eyebrow"><%= @run.mode.humanize %></p>
+    <h1><%= @run.title %></h1>
+    <p class="lead"><%= @run.summary %></p>
+    <p><span class="<%= status_class(@run.status) %>"><%= @run.status %></span></p>
+  </div>
+
+  <div class="split">
+    <div class="panel">
+      <h2>Execution</h2>
+      <div class="meta">
+        <div><span>Command</span><strong><code><%= @run.command_line %></code></strong></div>
+        <div><span>Config</span><strong><%= @run.config_path %></strong></div>
+        <div><span>Elapsed</span><strong><%= format_seconds(@run.elapsed_seconds) %></strong></div>
+        <div><span>Exit</span><strong><%= @run.exit_status || "n/a" %></strong></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Timing</h2>
+      <div class="meta">
+        <div><span>Started</span><strong><%= @run.started_at || "n/a" %></strong></div>
+        <div><span>Finished</span><strong><%= @run.finished_at || "n/a" %></strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Output</h2>
+    <div class="split">
+      <div>
+        <h3>Stdout</h3>
+        <pre class="output"><code><%= @run.stdout.presence || "No stdout captured." %></code></pre>
+      </div>
+      <div>
+        <h3>Stderr</h3>
+        <pre class="output"><code><%= @run.stderr.presence || "No stderr captured." %></code></pre>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,13 @@
+source:
+  kind: streams
+  connection:
+    url: redis://127.0.0.1:6379/0
+  streams:
+    - cdc:orders
+  mode: read
+  start_position: "0-0"
+  count: 10
+  block_ms: 1000
+  reconnect: true
+  reconnect_delay: 0.25
+  max_reconnect_attempts: 5

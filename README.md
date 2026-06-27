@@ -51,9 +51,3 @@ public product discovery, customer evaluation, and link sharing.
 ## Deploy
 
 The included GitHub Actions workflow deploys `docs/` to GitHub Pages.
-
-Manual setup:
-
-1. Enable GitHub Pages for this repository.
-2. Select GitHub Actions as the Pages source.
-3. Push changes to `main`.

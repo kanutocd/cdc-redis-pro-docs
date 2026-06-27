@@ -1,0 +1,62 @@
+<section class="stack">
+  <div class="panel">
+    <p class="eyebrow">Documentation</p>
+    <h1>Local API docs and sample references</h1>
+    <p class="lead">
+      This app is designed to sit on top of the licensed gems and make the
+      generated docs easy to find from the sample itself.
+    </p>
+  </div>
+
+  <div class="grid">
+    <article class="tile">
+      <h3>YARD docs</h3>
+      <% if @docs_ready %>
+        <p>The local API docs are already generated.</p>
+        <p>
+          <%= link_to external_link_label("Open API docs"),
+                      @local_docs_url,
+                      class: "button secondary",
+                      target: "_blank",
+                      rel: "noreferrer" %>
+        </p>
+      <% else %>
+        <p>Generate local docs after bundle install.</p>
+        <pre><code>bundle exec rake docs:generate</code></pre>
+        <p><%= button_to "Generate API docs", generate_api_docs_path, method: :post, class: "button" %></p>
+      <% end %>
+      <p>Generated docs live at <code><%= @local_docs_path %></code>.</p>
+    </article>
+
+    <article class="tile">
+      <h3>this.Sample Application  README</h3>
+      <p>Use the sample app README for setup, modes, and demo notes.</p>
+      <p>
+        <%= link_to external_link_label("Open README"),
+                    "https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-rails-dashboard/README.md",
+                    target: "_blank", rel: "noreferrer" %>
+      </p>
+    </article>
+
+    <article class="tile">
+      <h3>Recordings</h3>
+      <ul>
+        <li><%= link_to external_link_label("Streams recording"), "https://asciinema.org/a/ZgYkH5QwZLDFJ6YL", target: "_blank", rel: "noreferrer" %></li>
+        <li><%= link_to external_link_label("Pub/Sub recording"), "https://asciinema.org/a/nnV4iiRX6Pw0YEag", target: "_blank", rel: "noreferrer" %></li>
+        <li><%= link_to external_link_label("Sharded Pub/Sub recording"), "https://asciinema.org/a/5hyyHBrML12Bu6z4", target: "_blank", rel: "noreferrer" %></li>
+        <li><%= link_to external_link_label("Keyspace recording"), "https://asciinema.org/a/H6mhFGoUTTiNmj6x", target: "_blank", rel: "noreferrer" %></li>
+      </ul>
+    </article>
+
+    <article class="tile">
+      <h3>Public site</h3>
+      <p>The product landing page and benchmark evidence live in the docs repo.</p>
+      <p>
+        <%= link_to external_link_label("Open public docs"),
+                    "https://kanutocd.github.io/cdc-redis-pro-docs/",
+                    target: "_blank",
+                    rel: "noreferrer" %>
+      </p>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,35 @@
+<section class="stack">
+  <div class="panel">
+    <p class="eyebrow"><%= @scenario.key.humanize %></p>
+    <h1><%= @scenario.label %></h1>
+    <p class="lead"><%= @scenario.summary %></p>
+    <div class="actions">
+      <%= button_to "Run demo", public_send("run_#{@scenario.key}_path"), method: :post, class: "button" %>
+      <%= link_to "Back to dashboard", root_path, class: "button secondary" %>
+    </div>
+  </div>
+
+  <div class="split">
+    <div class="panel">
+      <h2>Command</h2>
+      <pre><code><%= @scenario.command_line %></code></pre>
+      <p class="muted">Config: <code><%= @scenario.config_path %></code></p>
+    </div>
+
+    <div class="panel">
+      <h2>Latest run</h2>
+      <% if @latest_run %>
+        <p><span class="<%= status_class(@latest_run.status) %>"><%= @latest_run.status %></span></p>
+        <div class="meta">
+          <div><span>Started</span><strong><%= @latest_run.started_at || "n/a" %></strong></div>
+          <div><span>Finished</span><strong><%= @latest_run.finished_at || "n/a" %></strong></div>
+          <div><span>Elapsed</span><strong><%= format_seconds(@latest_run.elapsed_seconds) %></strong></div>
+          <div><span>Exit</span><strong><%= @latest_run.exit_status || "n/a" %></strong></div>
+        </div>
+        <p><%= link_to "Open run details", demo_run_path(@latest_run) %></p>
+      <% else %>
+        <p class="muted">No runs have been recorded yet.</p>
+      <% end %>
+    </div>
+  </div>
+</section>

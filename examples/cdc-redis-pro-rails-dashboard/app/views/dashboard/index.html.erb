@@ -1,0 +1,74 @@
+<section class="hero">
+  <div>
+    <p class="eyebrow">Sample app</p>
+    <h1>CDC Pro for Redis dashboard</h1>
+    <p class="lead">
+      A Rails sample that lets a customer inspect the four Redis event system
+      modes, launch bounded demo runs, and inspect the downstream orchestrator
+      output from the same public bundle.
+    </p>
+    <div class="actions">
+      <%= link_to "Open streams", streams_path, class: "button" %>
+      <%= link_to "Open Pub/Sub", pubsub_path, class: "button secondary" %>
+      <%= link_to "Open docs", docs_path, class: "button secondary" %>
+      <%= link_to "License notes", license_path, class: "button secondary" %>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <% @scenarios.each do |scenario| %>
+      <div class="metric">
+        <strong><%= scenario.label %></strong>
+        <span><%= scenario.summary %></span>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<section class="stack">
+  <div class="panel">
+    <h2>Source modes</h2>
+    <p class="muted">Each mode runs the public CLI against the matching source config.</p>
+    <div class="grid">
+      <% @scenarios.reject { |scenario| scenario.key == "orchestrator" }.each do |scenario| %>
+        <% latest = @latest_runs[scenario.key]&.first %>
+        <article class="tile">
+          <p class="label"><%= scenario.key.humanize %></p>
+          <h3><%= scenario.label %></h3>
+          <p><%= scenario.summary %></p>
+          <p class="muted"><code><%= scenario.config_path %></code></p>
+          <div class="button-row">
+            <%= link_to "Open", public_send("#{scenario.key}_path"), class: "button secondary" %>
+            <%= button_to "Run", public_send("run_#{scenario.key}_path"), method: :post, class: "button" %>
+``          </div>
+          <% if latest %>
+            <p class="muted">
+              Latest run: <span class="<%= status_class(latest.status) %>"><%= latest.status %></span>
+              <%= link_to "View", demo_run_path(latest) %>
+            </p>
+          <% end %>
+        </article>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Downstream orchestrator</h2>
+    <% orchestrator = @scenarios.find { |scenario| scenario.key == "orchestrator" } %>
+    <% latest = @latest_runs[orchestrator.key]&.first if orchestrator %>
+    <p class="muted">
+      Nested runtime, worker-local resources, and the downstream processing path
+      that the benchmark suite exercised.
+    </p>
+    <div class="button-row">
+      <%= link_to "Open orchestrator", orchestrator_path, class: "button secondary" %>
+      <%= button_to "Run orchestrator demo", run_orchestrator_path, method: :post, class: "button" %>
+    </div>
+    <% if latest %>
+      <p class="muted">
+        Latest run: <span class="<%= status_class(latest.status) %>"><%= latest.status %></span>
+        <%= link_to "View", demo_run_path(latest) %>
+      </p>
+    <% end %>
+  </div>
+</section>

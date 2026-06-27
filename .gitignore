@@ -3,3 +3,8 @@
 .envrc
 
 /.ignoreme/
+/examples/examples/cdc-redis-pro-rails-dashboard/public/docs/
+/examples/examples/cdc-redis-pro-rails-dashboard/.yardoc/
+/examples/examples/cdc-redis-pro-rails-dashboard/doc/
+/examples/cdc-redis-pro-pipeline/doc/
+/examples/cdc-redis-pro-pipeline/.yardoc/

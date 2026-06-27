@@ -1,0 +1,41 @@
+<section class="stack">
+  <div class="panel">
+    <p class="eyebrow">License</p>
+    <h1>Customer access and offline license setup</h1>
+    <p class="lead">
+      The sample app is public, but running it requires private gem access and
+      signed offline license variables for both gems.
+    </p>
+  </div>
+
+  <div class="grid">
+    <article class="tile">
+      <h3>Package access</h3>
+      <p>Configure Bundler with GitHub Packages credentials.</p>
+      <pre><code>bundle config set --local https://rubygems.pkg.github.com/kanutocd USER:TOKEN
+
+or configure credentials system wide:
+
+bundle config https://rubygems.pkg.github.com/kanutocd USER:TOKEN</code></pre>
+    </article>
+
+    <article class="tile">
+      <h3>License env</h3>
+      <pre><code>CDC_REDIS_PRO_LICENSE_KEY
+CDC_REDIS_PRO_LICENSE_PUBLIC_KEY
+CDC_ORCHESTRATOR_PRO_LICENSE_KEY
+CDC_ORCHESTRATOR_PRO_LICENSE_PUBLIC_KEY</code></pre>
+    </article>
+
+    <article class="tile">
+      <h3>Install flow</h3>
+      <pre><code>bundle install
+bundle exec rake docs:generate</code></pre>
+    </article>
+
+    <article class="tile">
+      <h3>Customer handoff</h3>
+      <p>Use the private gem access token and offline license file together.</p>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CDC Pro for Redis sample application dashboard</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="wrap site-nav">
+        <%= link_to "CDC Pro for Redis sample application", root_path, class: "brand" %>
+        <nav class="nav">
+          <%= link_to "Dashboard", root_path %>
+          <%= link_to "Streams", streams_path %>
+          <%= link_to "Pub/Sub", pubsub_path %>
+          <%= link_to "Sharded Pub/Sub", sharded_pubsub_path %>
+          <%= link_to "Keyspace", keyspace_path %>
+          <%= link_to "Orchestrator", orchestrator_path %>
+          <%= link_to "Docs", docs_path %>
+          <%= link_to "License", license_path %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <% if notice.present? %>
+        <div class="flash flash-notice"><%= notice %></div>
+      <% end %>
+
+      <% if alert.present? %>
+        <div class="flash flash-alert"><%= alert %></div>
+      <% end %>
+
+      <%= yield %>
+    </main>
+  </body>
+</html>
