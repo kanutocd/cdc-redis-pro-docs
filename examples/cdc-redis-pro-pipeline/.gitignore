@@ -1,0 +1,6 @@
+/.bundle/
+/doc/
+/.yardoc/
+/.env.local
+/tmp/
+/.ignoreme/

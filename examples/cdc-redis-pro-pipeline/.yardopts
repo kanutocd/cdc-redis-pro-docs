@@ -1,0 +1,5 @@
+--title "cdc-redis-pro pipeline sample"
+--readme README.md
+--markup markdown
+--output-dir doc
+bin/*.rb

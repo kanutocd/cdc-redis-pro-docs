@@ -589,6 +589,8 @@
             <div class="actions">
               <a class="button" href="#license">Get a license</a>
               <a class="button secondary" href="reports/">View benchmark reports</a>
+              <a class="button secondary" href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-pipeline">Open sample app</a>
+              <a class="button secondary" href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-rails-dashboard">Open Rails sample</a>
               <a class="button secondary" href="reports/analytics/">Open analytics dashboard</a>
             </div>
             <p class="hero-note">
@@ -684,10 +686,34 @@
               </p>
             </article>
             <article class="tile">
-              <h3>Local API docs</h3>
+              <h3>Sample pipeline app</h3>
               <p>
-                Customers can generate version-matched YARD docs locally from
-                the installed private gems with <code>bundle exec rake docs:generate</code>.
+                A standalone Ruby example shows worker-local Redis client
+                pooling upstream, Redis source mode configs, downstream
+                <code>process_many</code>, license env vars, and local API docs
+                generation.
+              </p>
+              <p>
+                <a href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-pipeline">View example</a>
+              </p>
+              <p>
+                <a href="https://asciinema.org/a/ZgYkH5QwZLDFJ6YL">Streams</a>,
+                <a href="https://asciinema.org/a/nnV4iiRX6Pw0YEag">Pub/Sub</a>,
+                <a href="https://asciinema.org/a/5hyyHBrML12Bu6z4">Sharded Pub/Sub</a>,
+                and
+                <a href="https://asciinema.org/a/H6mhFGoUTTiNmj6x">Keyspace</a>
+                recordings are published on asciinema.org.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>Sample Rails dashboard</h3>
+              <p>
+                A Rails front end for the same licensed bundle, with per-mode
+                run buttons, run history, and a local docs page customers can
+                open after installing the gems.
+              </p>
+              <p>
+                <a href="https://github.com/kanutocd/cdc-redis-pro-docs/tree/main/examples/cdc-redis-pro-rails-dashboard">View example</a>
               </p>
             </article>
           </div>

@@ -1,0 +1,12 @@
+source:
+  kind: sharded_pubsub
+  connection:
+    topology: cluster
+    nodes:
+      - redis://127.0.0.1:6379/0
+  channels:
+    - "{cdc}:orders"
+  reconnect: true
+  reconnect_delay: 0.25
+  max_reconnect_attempts: 5
+  topology_refresh_interval: 5

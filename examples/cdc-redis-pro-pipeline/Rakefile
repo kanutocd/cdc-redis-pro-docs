@@ -1,0 +1,52 @@
+# frozen_string_literal: true
+
+require "bundler"
+
+task default: :help
+
+desc "Print available sample commands"
+task :help do
+  puts <<~HELP
+    CDC Redis Pro pipeline sample
+
+    Setup:
+      docker compose up -d
+      bundle config https://rubygems.pkg.github.com/kanutocd GITHUB_USER:GITHUB_PAT
+      bundle install
+
+    Produce Redis Stream events:
+      bundle exec ruby bin/produce_stream.rb
+
+    Run downstream batch processing:
+      bundle exec ruby bin/sample_jsonl.rb | bundle exec ruby bin/process_many_jsonl.rb
+
+    Inspect Redis source modes:
+      bundle exec cdc-redis-pro run --config config/sources/streams.yml
+      bundle exec cdc-redis-pro run --config config/sources/pubsub.yml
+      bundle exec cdc-redis-pro run --config config/sources/sharded_pubsub.yml
+      bundle exec cdc-redis-pro run --config config/sources/keyspace.yml
+
+    Run direct Redis source -> cdc-orchestrator-pro pipeline:
+      bundle exec cdc-redis-pro pipe --config config/sources/streams.yml --metrics prometheus --limit 10
+
+    Generate local API docs:
+      bundle exec rake docs:generate
+  HELP
+end
+
+namespace :docs do
+  desc "Generate local API documentation for installed gems"
+  task :generate do
+    redis_lib = installed_gem_lib_path("cdc-redis-pro")
+    orchestrator_lib = installed_gem_lib_path("cdc-orchestrator-pro")
+    sh "bundle exec yard doc --output-dir doc #{redis_lib} #{orchestrator_lib}"
+    puts "Docs generated at #{File.expand_path("doc/index.html", __dir__)}"
+  end
+end
+
+def installed_gem_lib_path(name)
+  spec = Bundler.load.specs.find { |candidate| candidate.name == name }
+  abort "missing installed gem #{name}" unless spec
+
+  File.join(spec.full_gem_path, "lib")
+end
