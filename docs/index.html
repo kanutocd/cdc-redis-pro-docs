@@ -3,37 +3,37 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>cdc-redis-pro | Commercial Redis CDC source drivers for Ruby</title>
+    <title>CDC Pro for Redis | Redis CDC and orchestration for Ruby</title>
     <meta
       name="description"
-      content="cdc-redis-pro provides commercial Redis source drivers for cdc-core: Streams recovery, Pub/Sub, keyspace notifications, Sentinel failover, Redis Cluster routing, sharded Pub/Sub, and TLS/ACL certification."
+      content="CDC Pro for Redis combines cdc-redis-pro and cdc-orchestrator-pro: Redis Streams, Pub/Sub, keyspace notifications, Sentinel, Cluster, TLS/ACL, and high-throughput downstream orchestration for Ruby."
     >
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://kanutocd.github.io/cdc-redis-pro-docs/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://kanutocd.github.io/cdc-redis-pro-docs/">
-    <meta property="og:title" content="cdc-redis-pro">
+    <meta property="og:title" content="CDC Pro for Redis">
     <meta
       property="og:description"
-      content="Commercial Redis CDC source drivers for cdc-core with Streams recovery, ephemeral sources, Sentinel, Cluster, sharded Pub/Sub, and TLS/ACL certification."
+      content="Commercial Redis CDC sources and high-throughput Ruby orchestration with offline licensing, local API docs, and public benchmark evidence."
     >
     <meta name="twitter:card" content="summary_large_image">
     <style>
       :root {
         color-scheme: light;
-        --bg: #f7f5f0;
+        --bg: #f6f7f4;
         --surface: #ffffff;
-        --surface-alt: #f0f6f2;
-        --text: #17212b;
+        --surface-alt: #eef7f4;
+        --ink: #101827;
+        --text: #1c2833;
         --muted: #53606d;
-        --quiet: #6d7480;
-        --line: #d8ddd5;
+        --quiet: #717986;
+        --line: #d9dfd8;
         --primary: #0f766e;
         --primary-dark: #115e59;
-        --amber: #b45309;
-        --red: #b91c1c;
-        --ink: #101827;
+        --accent: #2563eb;
         --code: #111827;
+        --success: #15803d;
       }
 
       * {
@@ -57,18 +57,42 @@
         text-underline-offset: 0.2em;
       }
 
+      code {
+        padding: 0.13rem 0.32rem;
+        border-radius: 6px;
+        background: #edf2ef;
+        color: #15322f;
+        font-size: 0.92em;
+      }
+
+      pre {
+        overflow-x: auto;
+        margin: 0;
+        padding: 18px;
+        border-radius: 8px;
+        background: var(--code);
+        color: #e5e7eb;
+        font-size: 0.92rem;
+      }
+
+      pre code {
+        padding: 0;
+        background: transparent;
+        color: inherit;
+      }
+
       .wrap {
         width: min(1120px, calc(100% - 40px));
         margin: 0 auto;
       }
 
       header {
-        border-bottom: 1px solid var(--line);
-        background: rgba(247, 245, 240, 0.94);
-        backdrop-filter: blur(10px);
         position: sticky;
         top: 0;
         z-index: 10;
+        border-bottom: 1px solid var(--line);
+        background: rgba(246, 247, 244, 0.94);
+        backdrop-filter: blur(10px);
       }
 
       .nav {
@@ -94,21 +118,18 @@
         place-items: center;
         width: 34px;
         height: 34px;
-        border: 1px solid #cfd8d2;
+        border: 1px solid #cbd5d1;
         border-radius: 8px;
         background: #fff;
-      }
-
-      .brand span:last-child {
-        overflow-wrap: anywhere;
+        color: var(--primary-dark);
       }
 
       nav {
         display: flex;
         align-items: center;
-        gap: 18px;
-        flex-wrap: wrap;
         justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 18px;
         font-size: 0.94rem;
       }
 
@@ -130,7 +151,7 @@
 
       .hero-grid {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(340px, 0.86fr);
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 0.88fr);
         align-items: center;
         gap: 48px;
       }
@@ -152,16 +173,29 @@
       }
 
       h1 {
-        max-width: 720px;
+        max-width: 780px;
         margin-bottom: 18px;
         color: var(--ink);
-        font-size: clamp(2.45rem, 8vw, 5.8rem);
+        font-size: clamp(2.55rem, 8vw, 5.75rem);
         line-height: 0.96;
         letter-spacing: 0;
       }
 
+      h2 {
+        margin-bottom: 10px;
+        color: var(--ink);
+        font-size: clamp(1.72rem, 4vw, 2.65rem);
+        line-height: 1.1;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        color: var(--ink);
+        font-size: 1.05rem;
+      }
+
       .lead {
-        max-width: 68ch;
+        max-width: 70ch;
         color: var(--muted);
         font-size: 1.12rem;
       }
@@ -193,13 +227,17 @@
         color: var(--primary-dark);
       }
 
+      .button.blue {
+        background: var(--accent);
+      }
+
       .hero-note {
         margin-top: 22px;
         color: var(--quiet);
         font-size: 0.95rem;
       }
 
-      .topology {
+      .product-panel {
         border: 1px solid var(--line);
         border-radius: 8px;
         background: var(--surface);
@@ -207,7 +245,7 @@
         overflow: hidden;
       }
 
-      .topology-head {
+      .product-head {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -235,7 +273,7 @@
         background: #16a34a;
       }
 
-      .topology-body {
+      .product-body {
         padding: 22px;
       }
 
@@ -285,7 +323,7 @@
 
       section {
         padding: 56px 0;
-        border-top: 1px solid rgba(216, 221, 213, 0.8);
+        border-top: 1px solid rgba(217, 223, 216, 0.88);
       }
 
       .section-head {
@@ -296,16 +334,8 @@
         margin-bottom: 22px;
       }
 
-      h2 {
-        margin-bottom: 10px;
-        color: var(--ink);
-        font-size: clamp(1.7rem, 4vw, 2.6rem);
-        line-height: 1.1;
-        letter-spacing: 0;
-      }
-
       .section-head p {
-        max-width: 58ch;
+        max-width: 60ch;
         color: var(--muted);
       }
 
@@ -323,12 +353,6 @@
         background: var(--surface);
       }
 
-      .tile h3 {
-        margin-bottom: 8px;
-        color: var(--ink);
-        font-size: 1.05rem;
-      }
-
       .tile p,
       .tile li {
         color: var(--muted);
@@ -337,6 +361,77 @@
       ul {
         margin: 0;
         padding-left: 20px;
+      }
+
+      .split {
+        display: grid;
+        grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .panel {
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin: 18px 0 4px;
+      }
+
+      .metric {
+        padding: 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fcfcfa;
+      }
+
+      .metric span {
+        display: block;
+        color: var(--quiet);
+        font-size: 0.82rem;
+        font-weight: 760;
+      }
+
+      .metric strong {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink);
+        font-size: 1.22rem;
+      }
+
+      .checks {
+        display: grid;
+        gap: 10px;
+      }
+
+      .check {
+        display: grid;
+        grid-template-columns: 24px minmax(0, 1fr);
+        gap: 10px;
+        align-items: start;
+        color: var(--muted);
+      }
+
+      .check b {
+        color: var(--text);
+      }
+
+      .badge {
+        display: inline-grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        background: #dcfce7;
+        color: #166534;
+        font-weight: 900;
+        line-height: 1;
       }
 
       .matrix {
@@ -370,107 +465,21 @@
         border-bottom: 0;
       }
 
-      code {
-        padding: 0.13rem 0.32rem;
-        border-radius: 6px;
-        background: #eef3ef;
-        color: #15322f;
-        font-size: 0.92em;
-      }
-
-      pre {
-        overflow-x: auto;
-        margin: 0;
-        padding: 18px;
-        border-radius: 8px;
-        background: var(--code);
-        color: #e5e7eb;
-        font-size: 0.92rem;
-      }
-
-      pre code {
-        padding: 0;
-        background: transparent;
-        color: inherit;
-      }
-
-      .split {
-        display: grid;
-        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-        gap: 18px;
-        align-items: start;
-      }
-
-      .panel {
-        padding: 20px;
+      .chart {
+        width: 100%;
+        min-height: 260px;
         border: 1px solid var(--line);
         border-radius: 8px;
-        background: var(--surface);
+        background: #fff;
+        object-fit: contain;
       }
 
-      .checks {
-        display: grid;
-        gap: 10px;
-      }
-
-      .result-grid {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 10px;
-        margin: 18px 0 4px;
-      }
-
-      .result {
-        padding: 14px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fcfcfa;
-      }
-
-      .result span {
-        display: block;
-        color: var(--quiet);
-        font-size: 0.82rem;
-        font-weight: 760;
-      }
-
-      .result strong {
-        display: block;
-        margin-top: 4px;
-        color: var(--ink);
-        font-size: 1.22rem;
-      }
-
-      .check {
-        display: grid;
-        grid-template-columns: 24px minmax(0, 1fr);
-        gap: 10px;
-        align-items: start;
-        color: var(--muted);
-      }
-
-      .check b {
-        color: var(--text);
-      }
-
-      .badge {
-        display: inline-grid;
-        place-items: center;
-        width: 24px;
-        height: 24px;
-        border-radius: 999px;
-        background: #dcfce7;
-        color: #166534;
-        font-weight: 900;
-        line-height: 1;
-      }
-
-      .warning {
-        border-left: 4px solid var(--amber);
+      .notice {
+        border-left: 4px solid var(--primary);
         padding: 14px 16px;
         border-radius: 8px;
-        background: #fff7ed;
-        color: #7c2d12;
+        background: #ecfdf5;
+        color: #14532d;
       }
 
       footer {
@@ -480,7 +489,7 @@
         font-size: 0.94rem;
       }
 
-      @media (max-width: 840px) {
+      @media (max-width: 880px) {
         .hero {
           min-height: auto;
           padding-top: 42px;
@@ -488,7 +497,7 @@
 
         .hero-grid,
         .split,
-        .result-grid,
+        .metrics,
         .grid {
           grid-template-columns: 1fr;
         }
@@ -521,7 +530,7 @@
         }
 
         h1 {
-          font-size: 2.6rem;
+          font-size: 2.7rem;
         }
       }
     </style>
@@ -529,33 +538,37 @@
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "cdc-redis-pro",
+        "name": "CDC Pro for Redis",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Linux, macOS, Windows",
         "programmingLanguage": "Ruby",
         "runtimePlatform": "Ruby 4.0+",
-        "description": "Commercial Redis source drivers for cdc-core with Redis Streams recovery, Pub/Sub, keyspace notifications, Sentinel failover, Redis Cluster routing, sharded Pub/Sub, and TLS/ACL certification.",
+        "description": "Commercial Redis CDC source drivers and high-throughput orchestration for Ruby.",
         "url": "https://kanutocd.github.io/cdc-redis-pro-docs/",
         "codeRepository": "https://github.com/kanutocd/cdc-redis-pro-docs",
-        "keywords": "Redis CDC, Redis Streams, Ruby, cdc-core, Sentinel, Redis Cluster, keyspace notifications"
+        "keywords": "Redis CDC, Redis Streams, Ruby, cdc-core, Sentinel, Redis Cluster, cdc-orchestrator-pro, cdc-redis-pro",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/LimitedAvailability",
+          "businessFunction": "https://schema.org/Sell"
+        }
       }
     </script>
   </head>
   <body>
     <header>
       <div class="wrap nav">
-        <a class="brand" href="#top" aria-label="cdc-redis-pro home">
+        <a class="brand" href="#top" aria-label="CDC Pro for Redis home">
           <span class="mark">R</span>
-          <span>cdc-redis-pro</span>
+          <span>CDC Pro for Redis</span>
         </a>
         <nav aria-label="Page sections">
-          <a href="#capabilities">Capabilities</a>
-          <a href="#guarantees">Guarantees</a>
-          <a href="#topologies">Topologies</a>
-          <a href="#orchestrator">Orchestrator</a>
-          <a href="#cli">CLI</a>
-          <a href="#reports">Reports</a>
-          <a href="#access">Access</a>
+          <a href="#features">Features</a>
+          <a href="#orchestration">Orchestration</a>
+          <a href="#evidence">Benchmarks</a>
+          <a href="#license">License</a>
+          <a href="#install">Install</a>
+          <a href="#support">Support</a>
         </nav>
       </div>
     </header>
@@ -564,50 +577,52 @@
       <section class="hero">
         <div class="wrap hero-grid">
           <div>
-            <p class="eyebrow">Commercial Redis CDC sources for Ruby</p>
-            <h1>cdc-redis-pro</h1>
+            <p class="eyebrow">Commercial Redis CDC for Ruby</p>
+            <h1>CDC Pro for Redis</h1>
             <p class="lead">
-              Redis source drivers for <code>cdc-core</code>: recoverable
-              Streams, ephemeral Pub/Sub and keyspace notifications, Sentinel
-              failover, Redis Cluster routing, sharded Pub/Sub, and
-              Docker-backed certification for TLS, ACLs, failover, and
-              resharding.
+              A paid Ruby CDC bundle for Redis-heavy systems: fast Redis source
+              drivers from <code>cdc-redis-pro</code>, paired with
+              <code>cdc-orchestrator-pro</code> for concurrent downstream
+              processing, worker-local resource pools, and benchmark-backed
+              runtime tuning.
             </p>
             <div class="actions">
-              <a class="button" href="#quickstart">View integration shape</a>
-              <a class="button secondary" href="#access">Request package access</a>
+              <a class="button" href="#license">Get a license</a>
+              <a class="button secondary" href="reports/">View benchmark reports</a>
+              <a class="button secondary" href="reports/analytics/">Open analytics dashboard</a>
             </div>
             <p class="hero-note">
-              Public documentation mirror for discovery. The implementation
-              remains private and is distributed as a commercial gem.
+              The source code and package registry remain private. This public
+              site exists for discovery, product evaluation, and customer
+              onboarding.
             </p>
           </div>
 
-          <aside class="topology" aria-label="Redis source topology diagram">
-            <div class="topology-head">
-              <span>Source pipeline</span>
-              <span class="status"><span class="dot"></span>certified locally</span>
+          <aside class="product-panel" aria-label="Product architecture">
+            <div class="product-head">
+              <span>Product bundle</span>
+              <span class="status"><span class="dot"></span>v0.9.0 founding release</span>
             </div>
-            <div class="topology-body">
+            <div class="product-body">
               <div class="flow">
                 <div class="node">
                   <span class="icon">1</span>
-                  <span><strong>Redis topology</strong><span>Standalone, TLS, Sentinel, Cluster</span></span>
+                  <span><strong>Redis upstream</strong><span>Streams, Pub/Sub, sharded Pub/Sub, keyspace events</span></span>
                 </div>
                 <div class="connector"></div>
                 <div class="node">
                   <span class="icon">2</span>
-                  <span><strong>Source driver</strong><span>Streams, Pub/Sub, sharded Pub/Sub, keyspace</span></span>
+                  <span><strong>cdc-redis-pro</strong><span>Source normalization, recovery, topology handling, CLI pipe</span></span>
                 </div>
                 <div class="connector"></div>
                 <div class="node">
                   <span class="icon">3</span>
-                  <span><strong>SourceEvent</strong><span>Immutable Redis event envelope</span></span>
+                  <span><strong>cdc-orchestrator-pro</strong><span>Ractor + fiber execution, LocalResourcePool, failure policy</span></span>
                 </div>
                 <div class="connector"></div>
                 <div class="node">
                   <span class="icon">4</span>
-                  <span><strong>cdc-core adapter</strong><span>Normalized change events for downstream sinks</span></span>
+                  <span><strong>Your downstream sink</strong><span>Redis, database, job, API, or customer processor</span></span>
                 </div>
               </div>
             </div>
@@ -615,17 +630,17 @@
         </div>
       </section>
 
-      <section id="capabilities">
+      <section id="features">
         <div class="wrap">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Capability surface</p>
-              <h2>Built around Redis source semantics</h2>
+              <p class="eyebrow">Features</p>
+              <h2>Redis source drivers built for real topologies</h2>
             </div>
             <p>
-              Redis does not expose one universal CDC stream. The gem keeps
-              each source mode explicit so replay, loss, checkpointing, and
-              recovery guarantees stay visible to operators.
+              Use Redis as a high-speed CDC ingress path without pretending it
+              has PostgreSQL replication semantics. Durable and ephemeral modes
+              are surfaced honestly, with health, metrics, and topology checks.
             </p>
           </div>
 
@@ -633,388 +648,266 @@
             <article class="tile">
               <h3>Redis Streams</h3>
               <p>
-                <code>XREAD</code>, <code>XREADGROUP</code>, consumer groups,
-                checkpoint inspection, pending-entry recovery,
-                <code>XAUTOCLAIM</code>, duplicate suppression, and optional
-                dead-letter streams.
+                Consumer groups, checkpointing, pending-entry recovery,
+                duplicate suppression, dead-letter streams, and batch-aware
+                source execution for recoverable workloads.
               </p>
             </article>
-
             <article class="tile">
-              <h3>Ephemeral channels</h3>
+              <h3>Pub/Sub and keyspace events</h3>
               <p>
-                Exact Pub/Sub, pattern Pub/Sub, and Redis Cluster sharded
-                Pub/Sub with readiness tracking, reconnect metrics, and
-                explicit loss-window reporting.
+                Low-latency ephemeral sources for events where speed matters
+                more than replay. Loss windows are explicit instead of hidden.
               </p>
             </article>
-
             <article class="tile">
-              <h3>Keyspace notifications</h3>
+              <h3>Cluster and Sentinel</h3>
               <p>
-                Startup validation for <code>notify-keyspace-events</code>,
-                optional best-effort value enrichment, and Cluster
-                multi-primary subscriptions through <code>CLUSTER SHARDS</code>.
+                Sentinel primary discovery, Redis Cluster routing, same-slot
+                Streams, sharded Pub/Sub, and multi-primary keyspace
+                subscription support.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>TLS and ACLs</h3>
+              <p>
+                Certified local topologies cover TLS, ACL authentication,
+                standalone Redis, Sentinel, and Cluster configurations.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>CLI-first operations</h3>
+              <p>
+                Run sources, check health, print Prometheus metrics, process
+                JSONL events, or pipe Redis source events directly into the
+                orchestrator runtime.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>Local API docs</h3>
+              <p>
+                Customers can generate version-matched YARD docs locally from
+                the installed private gems with <code>bundle exec rake docs:generate</code>.
               </p>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="guarantees">
+      <section id="orchestration">
+        <div class="wrap split">
+          <div>
+            <p class="eyebrow">Downstream runtime</p>
+            <h2>Fast upstream source, stronger downstream primitives</h2>
+            <p class="lead">
+              The bundle showcases Redis as a fast upstream source coupled to
+              <code>cdc-orchestrator-pro</code> for downstream processing:
+              outer Ractor workers, inner fiber concurrency, partitioning,
+              failure policy, and worker-local resource ownership.
+            </p>
+            <div class="checks">
+              <div class="check"><span class="badge">✓</span><span><b>Nested runtime:</b> cdc-parallel outside, cdc-concurrent inside.</span></div>
+              <div class="check"><span class="badge">✓</span><span><b>LocalResourcePool:</b> each worker owns its own live Redis/database clients.</span></div>
+              <div class="check"><span class="badge">✓</span><span><b>Batch-aware CLI:</b> JSONL batches and direct Redis source piping.</span></div>
+              <div class="check"><span class="badge">✓</span><span><b>Metrics:</b> runtime throughput, failures, and Prometheus text output.</span></div>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Operational commands</h3>
+            <pre><code>cdc-redis-pro run --config redis.yml --metrics prometheus
+cdc-redis-pro health --config redis.yml
+cdc-redis-pro metrics --config redis.yml
+cdc-redis-pro orchestrate --batch-size 25 --redis-url redis://...
+cdc-redis-pro pipe --config redis.yml --ractors 3 --fibers 50</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="evidence">
         <div class="wrap">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Delivery model</p>
-              <h2>Guarantees are source-specific</h2>
-            </div>
-          </div>
-
-          <table class="matrix">
-            <thead>
-              <tr>
-                <th>Source</th>
-                <th>Delivery</th>
-                <th>Replay</th>
-                <th>Operational note</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Streams</td>
-                <td>At-least-once</td>
-                <td>Yes</td>
-                <td>Acknowledges and advances checkpoints only after successful processing.</td>
-              </tr>
-              <tr>
-                <td>Pub/Sub</td>
-                <td>At-most-once</td>
-                <td>No</td>
-                <td>Reconnects report loss windows; missed messages are not recovered.</td>
-              </tr>
-              <tr>
-                <td>Sharded Pub/Sub</td>
-                <td>At-most-once</td>
-                <td>No</td>
-                <td>Routes channels by slot and rebinds subscriptions after topology changes.</td>
-              </tr>
-              <tr>
-                <td>Keyspace notifications</td>
-                <td>At-most-once</td>
-                <td>No</td>
-                <td>Reports key and operation; optional enrichment is best effort.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section id="topologies">
-        <div class="wrap split">
-          <div>
-            <p class="eyebrow">Production topology</p>
-            <h2>Sentinel, Cluster, TLS, and ACLs</h2>
-            <p class="lead">
-              Connection setup is topology-neutral at the source API boundary.
-              Source-owned clients reconnect through the same factory, while
-              Redis Cluster commands route through <code>redis-cluster-client</code>.
-            </p>
-            <div class="warning">
-              Cluster Streams support single streams and hash-tagged
-              same-slot multi-stream reads. Redis requires one-slot
-              <code>XREAD</code> and <code>XREADGROUP</code> commands.
-            </div>
-          </div>
-
-          <div class="panel checks">
-            <div class="check">
-              <span class="badge">OK</span>
-              <span><b>Sentinel failover</b><br>Primary-loss certification for Streams, Pub/Sub, and keyspace sources.</span>
-            </div>
-            <div class="check">
-              <span class="badge">OK</span>
-              <span><b>Redis Cluster routing</b><br>Cross-slot commands, same-slot Streams, sharded Pub/Sub, keyspace subscriptions, node restart, and active resharding.</span>
-            </div>
-            <div class="check">
-              <span class="badge">OK</span>
-              <span><b>TLS and ACL matrix</b><br>Standalone, Sentinel, and Cluster certification with CA verification and rejected credential checks.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="quickstart">
-        <div class="wrap split">
-          <div>
-            <p class="eyebrow">Integration shape</p>
-            <h2>Fast Redis source to bounded runner</h2>
-            <p class="lead">
-              The private gem exposes Redis-native source events, a
-              <code>cdc-core</code> adapter, and a Phase 6
-              <code>SourceRunner</code> for bounded processing, lifecycle
-              health, and orchestrator-friendly error observation. Redis is
-              positioned as the fast upstream signal layer; PostgreSQL remains
-              the stronger durability baseline.
-            </p>
-          </div>
-          <pre><code>require "cdc/redis/pro"
-
-source = CDC::Redis::Pro::Streams::Source.new(
-  connection: { url: ENV.fetch("REDIS_URL") },
-  streams: ["orders"],
-  group: "cdc",
-  consumer: "worker-1",
-  checkpoint_store: CDC::Redis::Pro::MemoryCheckpointStore.new,
-  dead_letter_stream: "orders.dead"
-)
-
-adapter = CDC::Redis::Pro::SourceAdapter.new
-
-runner = CDC::Redis::Pro::SourceRunner.new(
-  source: source,
-  adapter: adapter,
-  queue_size: 16,
-  worker_count: 2
-)
-
-runner.start do |change_event, source_event|
-  process(change_event)
-end</code></pre>
-        </div>
-      </section>
-
-      <section id="orchestrator">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">Phase 6 proof layer</p>
-              <h2>Redis feed, cdc-orchestrator-pro downstream</h2>
+              <p class="eyebrow">Performance evidence</p>
+              <h2>Public benchmark, soak, and chaos reports</h2>
             </div>
             <p>
-              Phase 6 showcases the pairing: a very fast Redis upstream source
-              feeding <code>cdc-orchestrator-pro</code> downstream primitives.
-              The public benchmark harness exercises <code>NestedRuntime</code>
-              directly with cdc-parallel Ractors, cdc-concurrent fiber fan-out,
-              and worker-local <code>LocalResourcePool</code> Redis clients.
+              The published reports expose CSV-backed benchmark artifacts and a
+              generated analytics dashboard for Redis source and downstream
+              orchestration workloads.
             </p>
           </div>
 
-          <div class="grid">
-            <article class="tile">
-              <h3>Inception pool</h3>
-              <p>
-                The runtime shape is source to <code>CDC::Core::ChangeEvent</code>,
-                partition router, prewarmed Ractor workers, worker-local
-                <code>LocalResourcePool</code> Redis clients, and concurrent
-                fiber fan-out. This keeps the less durable Redis signal
-                separated from the heavier downstream execution layer.
-              </p>
+          <div class="metrics" aria-label="Benchmark highlights">
+            <article class="metric">
+              <span>Peak runtime</span>
+              <strong>54.5k events/s</strong>
             </article>
-            <article class="tile">
-              <h3>Benchmark matrix</h3>
-              <p>
-                The public harness varies 1, 3, and 7 Ractors; 1, 5, and 10
-                Redis connections per Ractor; 10, 50, and 100 fibers; and
-                ordered versus unordered delivery. It reports throughput,
-                latency, CPU, RSS, Redis ops, mailbox depth, and failures.
-              </p>
+            <article class="metric">
+              <span>Benchmarked events</span>
+              <strong>3.27M</strong>
             </article>
-            <article class="tile">
-              <h3>Observed run</h3>
-              <p>
-                The latest pgoutput-to-Redis matrix completed 54 of 54 stable
-                runs with a peak of 19,977 events/s. A Streams soak processed
-                1.34M events over five minutes with 0 failures and 2.1%
-                median throughput degradation.
-              </p>
+            <article class="metric">
+              <span>Benchmark failures</span>
+              <strong>0</strong>
+            </article>
+            <article class="metric">
+              <span>Chaos recovery</span>
+              <strong>12/12</strong>
             </article>
           </div>
 
-          <div class="warning">
-            Redis Streams, Pub/Sub, and keyspace notifications are intentionally
-            presented with different replay and loss semantics. The benchmark
-            demonstrates orchestration capacity; it does not claim Redis
-            Pub/Sub or keyspace notifications are as durable as PostgreSQL WAL.
-          </div>
-
-          <pre><code>sink = CDC::Redis::Pro::Orchestrator.redis_sink(
-  connection: { url: ENV.fetch("REDIS_URL") },
-  redis_connections: 5,
-  key_prefix: "orders_projection",
-  id_field: "stream_id",
-  value_field: "payload"
-)
-
-runtime = CDC::Redis::Pro::Orchestrator.runtime(
-  processor: sink,
-  ractors: 3,
-  fiber_concurrency: 50,
-  timeout: 30.0,
-  preserve_order: true,
-  partition_strategy: :round_robin
-)
-
-results = runtime.process_many(change_events)</code></pre>
-
-          <pre><code>bundle exec cdc-redis-pro orchestrate \
-  --redis-url "$REDIS_URL" \
-  --batch-size 1000 \
-  --ractors 3 \
-  --redis-connections 5 \
-  --fibers 50 \
-  --preserve-order true \
-  --partition-strategy round_robin \
-  --key-prefix orders_projection \
-  --id-field stream_id \
-  --value-field payload</code></pre>
-
-          <pre><code>bundle exec cdc-redis-pro pipe \
-  --config config/redis-source.yml \
-  --redis-url "$REDIS_URL" \
-  --batch-size 100 \
-  --ractors 3 \
-  --redis-connections 5 \
-  --fibers 50 \
-  --metrics prometheus</code></pre>
-        </div>
-      </section>
-
-      <section id="cli">
-        <div class="wrap">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">Operational CLI</p>
-              <h2>Source inspection and downstream orchestration</h2>
+          <div class="split" style="margin-top: 18px;">
+            <img
+              class="chart"
+              src="reports/analytics/charts/latency-throughput.svg"
+              alt="Latency and throughput benchmark chart"
+              loading="lazy"
+            >
+            <div class="panel">
+              <h3>What to inspect</h3>
+              <ul>
+                <li>Throughput and latency across synthetic, Streams, Pub/Sub, CPU+Redis, and pgoutput+Redis workloads.</li>
+                <li>Resource behavior: CPU, RSS, allocations, Redis operations, and worker mailbox depth.</li>
+                <li>Soak stability and recovery behavior under Redis and source outages.</li>
+              </ul>
+              <div class="actions">
+                <a class="button" href="reports/analytics/">Open dashboard</a>
+                <a class="button secondary" href="reports/">Browse raw reports</a>
+              </div>
             </div>
-            <p>
-              <code>run</code>, <code>health</code>, and <code>metrics</code>
-              inspect source behavior. <code>orchestrate</code> consumes
-              bounded JSONL batches. <code>pipe</code> runs a configured Redis
-              source directly through <code>NestedRuntime</code>.
-            </p>
-          </div>
-
-          <div class="grid">
-            <article class="tile">
-              <h3>Batch-aware pipe</h3>
-              <p>
-                Redis Streams sources can use <code>--batch-size</code> while
-                keeping acknowledgement downstream-success gated.
-              </p>
-            </article>
-            <article class="tile">
-              <h3>Runtime metrics</h3>
-              <p>
-                Prometheus output includes source counters plus orchestrator
-                events, batches, failures, and batch latency totals.
-              </p>
-            </article>
-            <article class="tile">
-              <h3>Rails defaults</h3>
-              <p>
-                Applications can configure orchestrator defaults once through
-                <code>CDC::Redis::Pro.configuration.orchestrator</code>.
-              </p>
-            </article>
           </div>
         </div>
       </section>
 
-      <section id="reports">
+      <section id="license">
         <div class="wrap split">
           <div>
-            <p class="eyebrow">Public evidence</p>
-            <h2>Benchmark reports and analytics</h2>
+            <p class="eyebrow">Commercial license</p>
+            <h2>How to get access</h2>
             <p class="lead">
-              The public reports include generated analytics, raw CSV data,
-              Markdown summaries, soak artifacts, chaos recovery outputs, and
-              SVG charts. The dashboard is produced from the report CSV files
-              by <code>bundle exec rake benchmark:analyze</code>.
+              CDC Pro for Redis is sold manually for the founding release. A
+              paid license includes private GitHub Packages access, signed
+              offline license tokens, local API documentation, and support for
+              integration questions.
             </p>
-            <div class="result-grid" aria-label="Published benchmark results">
-              <div class="result">
-                <span>Peak runtime</span>
-                <strong>54.5k events/s</strong>
-              </div>
-              <div class="result">
-                <span>Redis Streams peak</span>
-                <strong>17.6k events/s</strong>
-              </div>
-              <div class="result">
-                <span>pgoutput+Redis peak</span>
-                <strong>20.0k events/s</strong>
-              </div>
-              <div class="result">
-                <span>Chaos recovery</span>
-                <strong>12/12 scenarios</strong>
-              </div>
-            </div>
             <div class="actions">
-              <a class="button" href="reports/analytics/">Open dashboard</a>
-              <a class="button secondary" href="reports/">Browse reports</a>
-              <a class="button secondary" href="reports/pipe-cli-verification.md">CLI verification</a>
+              <a class="button" href="mailto:kenneth.c.demanawa@gmail.com?subject=CDC%20Pro%20for%20Redis%20license%20request">Request a license</a>
+              <a class="button secondary" href="#install">View install shape</a>
             </div>
           </div>
-          <div class="panel checks">
-            <div class="check">
-              <span class="badge">OK</span>
-              <span><b>327 benchmark configurations</b><br>Throughput, latency, CPU, RSS, Redis ops, and failure counts from the matrix.</span>
-            </div>
-            <div class="check">
-              <span class="badge">OK</span>
-              <span><b>Soak windows</b><br>Five-minute, one-hour, and overnight artifacts where completed suites are available.</span>
-            </div>
-            <div class="check">
-              <span class="badge">OK</span>
-              <span><b>Chaos recovery</b><br>Redis and PostgreSQL outage/restart runs with recovery timing and post-recovery delivery checks.</span>
-            </div>
-            <div class="check">
-              <span class="badge">OK</span>
-              <span><b>Runtime semantics</b><br>Throughput measures <code>NestedRuntime</code> processing with <code>LocalResourcePool</code> resources after source acquisition, so complete-pipeline claims use end-to-end figures.</span>
-            </div>
+          <div class="panel">
+            <h3>What to send</h3>
+            <table class="matrix">
+              <tbody>
+                <tr>
+                  <th scope="row">GitHub username</th>
+                  <td>Used for private package access.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Use case</th>
+                  <td>Redis topology, expected event volume, and downstream sink.</td>
+                </tr>
+                <tr>
+                  <th scope="row">License term</th>
+                  <td>Founding license duration and renewal date are agreed manually.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Support channel</th>
+                  <td>Email, GitHub issue access, or another agreed customer channel.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      <section id="access">
+      <section id="install">
+        <div class="wrap split">
+          <div>
+            <p class="eyebrow">Customer setup</p>
+            <h2>Private package install and offline token verification</h2>
+            <p class="lead">
+              Customers install from GitHub Packages with a token that can read
+              private packages. Runtime license checks are offline: the app
+              receives a signed token and a public verification key.
+            </p>
+            <div class="notice">
+              The private signing key never ships with customer applications.
+              Customers receive only the signed token and public key.
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Bundle shape</h3>
+            <pre><code>bundle config https://rubygems.pkg.github.com/kanutocd USERNAME:TOKEN
+
+source "https://rubygems.pkg.github.com/kanutocd" do
+  gem "cdc-redis-pro", "0.9.0"
+  gem "cdc-orchestrator-pro", "0.9.0"
+end
+
+export CDC_REDIS_PRO_LICENSE_KEY="cdc-license-v1..."
+export CDC_REDIS_PRO_LICENSE_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----..."
+export CDC_ORCHESTRATOR_PRO_LICENSE_KEY="$CDC_REDIS_PRO_LICENSE_KEY"
+export CDC_ORCHESTRATOR_PRO_LICENSE_PUBLIC_KEY="$CDC_REDIS_PRO_LICENSE_PUBLIC_KEY"</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="support">
         <div class="wrap">
           <div class="section-head">
             <div>
-              <p class="eyebrow">Commercial access</p>
-              <h2>Private source, public discovery</h2>
+              <p class="eyebrow">Customer resources</p>
+              <h2>What a license includes</h2>
             </div>
             <p>
-              The production source drivers, recovery logic, topology
-              management, and package releases are private. This public mirror
-              exists so teams can evaluate fit, link the capability surface,
-              and discover the project through search.
+              The product value is private package access, commercial usage
+              rights, updates, and direct support. License checks are a local
+              entitlement guard, not a substitute for the commercial agreement.
             </p>
           </div>
 
           <div class="grid">
             <article class="tile">
-              <h3>Package</h3>
+              <h3>Private gems</h3>
               <p>
-                Distributed as <code>cdc-redis-pro</code> for Ruby 4.0+ through
-                authenticated package access.
+                Access to <code>cdc-redis-pro</code> and
+                <code>cdc-orchestrator-pro</code> through GitHub Packages.
               </p>
             </article>
             <article class="tile">
-              <h3>Current phase</h3>
+              <h3>Offline license</h3>
               <p>
-                Phase 4 production topology is complete. Phase 5 replication
-                capture is deferred as a larger premium capability. Phase 6
-                product integration now covers <code>SourceRunner</code>,
-                CLI health and metrics, Rails boot integration, and
-                orchestrator-focused benchmark positioning.
+                A signed token that can be verified locally without outbound
+                license-server access.
               </p>
             </article>
             <article class="tile">
-              <h3>Certification</h3>
+              <h3>Versioned docs</h3>
               <p>
-                Local Docker tasks validate Sentinel failover, Redis Cluster
-                routing and resharding, plus TLS/ACL behavior across supported
-                topologies.
+                Local YARD API docs generated from the exact installed gem
+                versions, plus this public discovery site.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>Benchmark reports</h3>
+              <p>
+                Public CSV and dashboard evidence for throughput, latency,
+                soak stability, and recovery behavior.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>Support</h3>
+              <p>
+                Integration help for Redis topology, runtime sizing, CLI use,
+                and production rollout questions.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>Updates</h3>
+              <p>
+                Access to commercial fixes and customer-visible package
+                releases during the license term.
               </p>
             </article>
           </div>
@@ -1024,10 +917,11 @@ results = runtime.process_many(change_events)</code></pre>
 
     <footer>
       <div class="wrap">
-        <strong>cdc-redis-pro</strong> is a commercial Redis source driver
-        package for <code>cdc-core</code>. Redis is a trademark of Redis Ltd.
-        This documentation mirror does not include private implementation
-        source.
+        <p>
+          CDC Pro for Redis is a commercial Ruby CDC bundle. Public docs are
+          hosted for product discovery; implementation and package distribution
+          remain private.
+        </p>
       </div>
     </footer>
   </body>

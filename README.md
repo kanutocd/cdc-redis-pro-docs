@@ -1,13 +1,23 @@
-# cdc-redis-pro-docs
+# CDC Pro for Redis docs
 
-Public documentation mirror for `cdc-redis-pro`, a commercial Redis source
-driver package for Ruby and `cdc-core`.
+Public product and customer onboarding site for the commercial CDC Pro for
+Redis bundle:
+
+- `cdc-redis-pro`
+- `cdc-orchestrator-pro`
 
 Published site:
 
 https://kanutocd.github.io/cdc-redis-pro-docs/
 
-## What cdc-redis-pro Covers
+## Product Positioning
+
+CDC Pro for Redis is a paid Ruby CDC bundle for Redis-heavy systems. It pairs
+fast Redis source drivers with downstream orchestration primitives for
+concurrent processing, worker-local resource pools, and benchmark-backed
+runtime tuning.
+
+## What The Bundle Covers
 
 - Redis Streams with consumer groups, checkpointing, pending-entry recovery,
   duplicate suppression, and dead-letter streams.
@@ -17,13 +27,19 @@ https://kanutocd.github.io/cdc-redis-pro-docs/
   optional best-effort value enrichment.
 - Sentinel failover, Redis Cluster routing, same-slot Cluster Streams,
   multi-primary Cluster keyspace subscriptions, TLS, and ACL authentication.
+- `cdc-orchestrator-pro` nested runtime support: Ractors outside, fibers
+  inside, worker-local resources through `LocalResourcePool`, and failure
+  policy handling.
+- Private GitHub Packages distribution with signed offline license tokens.
 
-## Repository Model
+## Site Structure
 
-The production implementation stays private. This public repository exists for
-documentation, discovery, search indexing, and link sharing.
+- `docs/index.html`: product and license landing page.
+- `docs/reports/`: benchmark, soak, chaos, and verification reports.
+- `docs/reports/analytics/`: generated benchmark analytics dashboard.
 
-The published GitHub Pages content lives in `docs/`.
+The implementation repos and gem packages remain private. This repo is for
+public product discovery, customer evaluation, and link sharing.
 
 ## Deploy
 

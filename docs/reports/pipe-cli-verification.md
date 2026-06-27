@@ -1,8 +1,8 @@
 # cdc-redis-pro pipe CLI verification
 
-This note records the Phase 6 CLI integration patch for the public discovery
-docs. It is not a throughput benchmark and should not be compared with the CSV
-benchmark matrix.
+This note records customer-visible CLI behavior for the direct Redis source to
+`cdc-orchestrator-pro` pipeline. It is not a throughput benchmark and should
+not be compared with the CSV benchmark matrix.
 
 Verified behavior in the private `cdc-redis-pro` quality gate:
 
