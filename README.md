@@ -37,6 +37,13 @@ runtime tuning.
 - `docs/index.html`: product and license landing page.
 - `docs/reports/`: benchmark, soak, chaos, and verification reports.
 - `docs/reports/analytics/`: generated benchmark analytics dashboard.
+- `examples/cdc-redis-pro-pipeline/`: standalone Ruby sample app for
+  licensed customers with GitHub Packages access. It showcases worker-local
+  upstream pooling, the four Redis source modes, and downstream
+  `process_many` orchestration.
+- `examples/cdc-redis-pro-rails-dashboard/`: Rails sample app for browsing
+  the public source modes, launching bounded demo runs, and opening local API
+  docs from the licensed bundle.
 
 The implementation repos and gem packages remain private. This repo is for
 public product discovery, customer evaluation, and link sharing.
