@@ -719,9 +719,9 @@
               <h2>Redis source drivers built for real topologies</h2>
             </div>
             <p>
-              Use Redis as a high-speed CDC ingress path without pretending it
-              has PostgreSQL replication semantics. Durable and ephemeral modes
-              are surfaced honestly, with health, metrics, and topology checks.
+              Use Redis as a high-speed CDC ingress path with honest durability
+              tradeoffs, clear topology support, and downstream orchestration
+              that is built for production use.
             </p>
           </div>
 
@@ -729,16 +729,29 @@
             <article class="tile">
               <h3>Redis Streams</h3>
               <p>
-                Consumer groups, checkpointing, pending-entry recovery,
-                duplicate suppression, dead-letter streams, and batch-aware
-                source execution for recoverable workloads.
+                Durable, ordered CDC for Redis Streams with fast parallel
+                downstream processing built for production workloads.
               </p>
             </article>
             <article class="tile">
-              <h3>Pub/Sub and keyspace events</h3>
+              <h3>Redis Pub/Sub</h3>
               <p>
-                Low-latency ephemeral sources for events where speed matters
-                more than replay. Loss windows are explicit instead of hidden.
+                Ultra-low-latency CDC delivery for real-time fan-out, lightweight
+                event propagation, and responsive systems.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>Redis Cluster sharded Pub/Sub</h3>
+              <p>
+                Horizontal CDC distribution across Redis Cluster shards for
+                higher throughput, broader fan-out, and scalable consumption.
+              </p>
+            </article>
+            <article class="tile">
+              <h3>Redis keyspace notifications</h3>
+              <p>
+                Reactive CDC from Redis key events for cache invalidation, live
+                state tracking, and event-driven automation.
               </p>
             </article>
             <article class="tile">
