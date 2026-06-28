@@ -97,7 +97,7 @@ GEM
       async (~> 2.0)
       cdc-core (~> 0.1, >= 0.1.3)
     cdc-core (0.1.3)
-    cdc-parallel (0.2.3)
+    cdc-parallel (0.2.4)
       cdc-core (>= 0.1)
     concurrent-ruby (1.3.7)
     connection_pool (3.0.2)
@@ -370,7 +370,7 @@ CHECKSUMS
   cdc-concurrent (0.1.1) sha256=6ca5b22499c40e50f69a86addb52516e49656866dbc221118fed10b7cf547fb5
   cdc-core (0.1.3) sha256=46926888ee6d05c0591e317e9e778d372b616c7674c30f4f1a65ae87c110820b
   cdc-orchestrator-pro (0.9.0) sha256=b1eac9312006f2813f5541c16b6de2cd20166a5e1f237a43d34a47034cdb5552
-  cdc-parallel (0.2.3) sha256=4fa711a7a02edfd82ea2083b3a746daa4d340a62b062bd1994983b2e012345d9
+  cdc-parallel (0.2.4) sha256=845798e6f3c806f18a248da37b761c4c8f170053d14137dd7969bda719dc3b7b
   cdc-redis-pro (0.9.0) sha256=1ef9c775faa15994376845e84483d06eb144f0224f43e7df05e4cdc2ec10e7e2
   concurrent-ruby (1.3.7) sha256=4412caec3a5ea2e5fdc52076724c071a81f2c0593d83b2ac8cbb8ca63b3151b0
   connection_pool (3.0.2) sha256=33fff5ba71a12d2aa26cb72b1db8bba2a1a01823559fb01d29eb74c286e62e0a
